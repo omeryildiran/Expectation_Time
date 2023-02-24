@@ -1,0 +1,29 @@
+11.9725 	WARNING 	We strongly recommend you activate the PTB sound engine in PsychoPy prefs as the preferred audio engine. Its timing is vastly superior. Your prefs are currently set to use ['sounddevice', 'PTB', 'pyo', 'pygame'] (in that order).
+28.6614 	DATA 	Mouse: Left button down, pos=(448,480)
+28.6622 	DATA 	Mouse:  Left button up, pos=(448,480)
+29.0272 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, autoLog=True, backendConf=UNKNOWN, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0, 0, 0]), colorSpace='rgb', depthBits=8, fullscr=<method-wrapper '__getattribute__' of attributeSetter object at 0x0000028809D70A30>, gamma=None, gammaErrorPolicy='raise', lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x000002880D076730>, multiSample=False, name='window1', numSamples=2, pos=(420, 180), screen=0, size=array([1080,  720]), stencilBits=0, stereo=False, units='height', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+29.0274 	EXP 	window1: mouseVisible = True
+29.0276 	EXP 	window1: mouseVisible = True
+29.0277 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+29.0277 	EXP 	window1: recordFrameIntervals = False
+29.1941 	EXP 	window1: recordFrameIntervals = True
+29.4099 	EXP 	Screen (0) actual frame rate measured at 60.38Hz
+29.4099 	EXP 	window1: recordFrameIntervals = False
+29.5627 	WARNING 	launchHubServer: If using the iohub mouse or eyetracker devices, fullScr should be True.
+32.4028 	EXP 	window1: mouseVisible = True
+32.4402 	EXP 	Created slider = Slider(__class__=<class 'psychopy.visual.slider.Slider'>, autoDraw=False, autoLog=True, borderColor=None, color=None, colorSpace='rgb', depth=0, fillColor=None, flip=False, font='Open Sans', granularity=0.0, labelColor=None, labelHeight=0.05, labelWrapWidth=None, labels=None, lineColor=None, markerColor=None, name='slider', opacity=None, ori=0.0, pos=array([ 0. , -0.4]), readOnly=False, self=UNKNOWN, size=array([1. , 0.1]), startValue=None, style='radio', styleTweaks=[], ticks=array([1, 2, 3, 4, 5]), units='height', win=Window(...))
+32.4403 	EXP 	window1: mouseVisible = True
+32.4451 	EXP 	Created polygon = ShapeStim(__class__=<class 'psychopy.visual.shape.ShapeStim'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-4.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1, 1, 1]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='polygon', opacity=1.0, ori=0.0, pos=array([0., 0.]), size=array([0.05, 0.05]), units='height', vertices=ndarray(...), win=Window(...), windingRule=None)
+32.4637 	EXP 	slider: autoLog = True
+32.4637 	EXP 	slider: markerPos = None
+32.4637 	EXP 	slider: styleTweaks = []
+32.4637 	EXP 	slider: styleTweaks = []
+32.4637 	EXP 	slider: styleTweaks = []
+32.4637 	EXP 	slider: styleTweaks = []
+32.4637 	EXP 	slider: contrast = 1.0
+32.4637 	EXP 	slider: autoLog = True
+32.4637 	EXP 	slider: markerPos = None
+32.4637 	EXP 	slider: markerPos = None
+32.4637 	EXP 	polygon: autoDraw = True
+33.1643 	DATA 	Mouse: Left button down, pos=(613,466)
+33.1981 	EXP 	window1: mouseVisible = True

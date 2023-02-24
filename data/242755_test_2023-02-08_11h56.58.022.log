@@ -1,0 +1,32 @@
+2.6589 	WARNING 	We strongly recommend you activate the PTB sound engine in PsychoPy prefs as the preferred audio engine. Its timing is vastly superior. Your prefs are currently set to use ['sounddevice', 'PTB', 'pyo', 'pygame'] (in that order).
+24.3263 	WARNING 	User requested fullscreen with size [1024  768], but screen is actually [1920, 1080]. Using actual size
+26.6292 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, autoLog=True, backendConf=UNKNOWN, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0, 0, 0]), colorSpace='rgb', depthBits=8, fullscr=<method-wrapper '__getattribute__' of attributeSetter object at 0x0000025BB7EEF910>, gamma=None, gammaErrorPolicy='raise', lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x0000025BBD076700>, multiSample=False, name='window1', numSamples=2, pos=(0, 0), screen=0, size=array([1920, 1080]), stencilBits=0, stereo=False, units='height', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+26.6293 	EXP 	window1: mouseVisible = True
+26.6294 	EXP 	window1: mouseVisible = False
+26.6294 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+26.6294 	EXP 	window1: recordFrameIntervals = False
+26.7957 	EXP 	window1: recordFrameIntervals = True
+26.9792 	EXP 	Screen (0) actual frame rate measured at 59.72Hz
+26.9792 	EXP 	window1: recordFrameIntervals = False
+28.7978 	EXP 	window1: mouseVisible = True
+28.8161 	EXP 	Created slider = Slider(__class__=<class 'psychopy.visual.slider.Slider'>, autoDraw=False, autoLog=True, borderColor=None, color=None, colorSpace='rgb', depth=0, fillColor=None, flip=False, font='Open Sans', granularity=0.0, labelColor=None, labelHeight=0.05, labelWrapWidth=None, labels=None, lineColor=None, markerColor=None, name='slider', opacity=None, ori=0.0, pos=array([ 0. , -0.4]), readOnly=False, self=UNKNOWN, size=array([1. , 0.1]), startValue=None, style='radio', styleTweaks=[], ticks=array([1, 2, 3, 4, 5]), units='height', win=Window(...))
+28.8162 	EXP 	window1: mouseVisible = True
+28.8385 	EXP 	slider: autoLog = True
+28.8385 	EXP 	slider: markerPos = None
+28.8385 	EXP 	slider: styleTweaks = []
+28.8385 	EXP 	slider: styleTweaks = []
+28.8385 	EXP 	slider: styleTweaks = []
+28.8385 	EXP 	slider: styleTweaks = []
+28.8385 	EXP 	slider: contrast = 1.0
+28.8385 	EXP 	slider: autoLog = True
+28.8385 	EXP 	slider: markerPos = None
+28.8385 	EXP 	slider: markerPos = None
+28.8385 	EXP 	slider: autoDraw = True
+31.0990 	DATA 	Mouse: Left button down, pos=(1553,827)
+31.7823 	DATA 	Mouse:  Left button up, pos=(1564,822)
+31.8147 	DATA 	Mouse: Left button down, pos=(1564,822)
+32.2476 	DATA 	Mouse:  Left button up, pos=(1564,765)
+33.6490 	DATA 	Mouse: Left button down, pos=(1553,837)
+34.0491 	DATA 	Mouse:  Left button up, pos=(1553,834)
+35.7999 	DATA 	Keypress: escape
+37.5144 	EXP 	window1: mouseVisible = True

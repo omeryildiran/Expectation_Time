@@ -1,0 +1,8 @@
+﻿famLoop.thisRepN,famLoop.thisTrialN,famLoop.thisN,famLoop.thisIndex,trialCycle.thisRepN,trialCycle.thisTrialN,trialCycle.thisN,trialCycle.thisIndex,trialss.thisRepN,trialss.thisTrialN,trialss.thisN,trialss.thisIndex,audioCue2Start.started,handMove.started,handOri,handMove.ended,audioCue2End.started,text.started,text.stopped,space2pass.keys,space2pass.rt,sapce2pass_2.keys,sapce2pass_2.rt,participant,session,date,expName,psychopyVersion,frameRate,
+0,0,0,0,,,,,,,,,11.549393570000756,11.582899870002802,269.9999999999998,13.56701567000091,13.56701567000091,,,,,,,063076,001,2023-01-10_18h00.12.630,expectation_shapes_perceived_time,2022.2.4,59.79527294444818,
+,,,,0,0,0,0,,,,,,,,,,14.550907700002426,14.750778900001023,space,0.9205237000023772,,,063076,001,2023-01-10_18h00.12.630,expectation_shapes_perceived_time,2022.2.4,59.79527294444818,
+,,,,1,0,1,0,,,,,,,,,,15.501444300000003,15.701623500001006,space,0.9393691000004765,,,063076,001,2023-01-10_18h00.12.630,expectation_shapes_perceived_time,2022.2.4,59.79527294444818,
+,,,,2,0,2,0,,,,,,,,,,16.468406200001482,16.66895740000109,space,0.9253179000006639,,,063076,001,2023-01-10_18h00.12.630,expectation_shapes_perceived_time,2022.2.4,59.79527294444818,
+,,,,3,0,3,0,,,,,,,,,,17.418982300001517,17.619141499999387,space,1.0826826000011351,,,063076,001,2023-01-10_18h00.12.630,expectation_shapes_perceived_time,2022.2.4,59.79527294444818,
+,,,,4,0,4,0,,,,,,,,,,18.519173600001523,18.719201800002338,space,1.115115100001276,,,063076,001,2023-01-10_18h00.12.630,expectation_shapes_perceived_time,2022.2.4,59.79527294444818,
+,,,,,,,,,,,,,,,,,,,,,space,0.06538580000051297,,,,,,,
