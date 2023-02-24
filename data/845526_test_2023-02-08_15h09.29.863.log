@@ -1,0 +1,44 @@
+5.0621 	WARNING 	We strongly recommend you activate the PTB sound engine in PsychoPy prefs as the preferred audio engine. Its timing is vastly superior. Your prefs are currently set to use ['sounddevice', 'PTB', 'pyo', 'pygame'] (in that order).
+12.6283 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, autoLog=True, backendConf=UNKNOWN, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0, 0, 0]), colorSpace='rgb', depthBits=8, fullscr=<method-wrapper '__getattribute__' of attributeSetter object at 0x0000026B005FDA00>, gamma=None, gammaErrorPolicy='raise', lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x0000026B0253C490>, multiSample=False, name='window1', numSamples=2, pos=(420, 180), screen=0, size=array([1080,  720]), stencilBits=0, stereo=False, units='height', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+12.6286 	EXP 	window1: mouseVisible = True
+12.6288 	EXP 	window1: mouseVisible = True
+12.6288 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+12.6289 	EXP 	window1: recordFrameIntervals = False
+12.7926 	EXP 	window1: recordFrameIntervals = True
+12.9762 	EXP 	Screen (0) actual frame rate measured at 59.97Hz
+12.9764 	EXP 	window1: recordFrameIntervals = False
+13.0869 	WARNING 	launchHubServer: If using the iohub mouse or eyetracker devices, fullScr should be True.
+16.7071 	EXP 	window1: mouseVisible = True
+16.7494 	EXP 	Created slider = Slider(__class__=<class 'psychopy.visual.slider.Slider'>, autoDraw=False, autoLog=True, borderColor=None, color=None, colorSpace='rgb', depth=0, fillColor=None, flip=False, font='Open Sans', granularity=0.0, labelColor=None, labelHeight=0.05, labelWrapWidth=None, labels=None, lineColor=None, markerColor=None, name='slider', opacity=None, ori=0.0, pos=array([ 0. , -0.4]), readOnly=False, self=UNKNOWN, size=array([1. , 0.1]), startValue=None, style='radio', styleTweaks=[], ticks=array([1, 2, 3, 4, 5]), units='height', win=Window(...))
+16.7495 	EXP 	window1: mouseVisible = True
+16.7553 	EXP 	Created polygon = ShapeStim(__class__=<class 'psychopy.visual.shape.ShapeStim'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-4.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1, 1, 1]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='polygon', opacity=1.0, ori=0.0, pos=array([0., 0.]), size=array([0.1, 0.1]), units='deg', vertices=ndarray(...), win=Window(...), windingRule=None)
+16.8129 	EXP 	slider: autoLog = True
+16.8129 	EXP 	slider: markerPos = None
+16.8129 	EXP 	slider: styleTweaks = []
+16.8129 	EXP 	slider: styleTweaks = []
+16.8129 	EXP 	slider: styleTweaks = []
+16.8129 	EXP 	slider: styleTweaks = []
+16.8129 	EXP 	slider: contrast = 1.0
+16.8129 	EXP 	slider: autoLog = True
+16.8129 	EXP 	slider: markerPos = None
+16.8129 	EXP 	slider: markerPos = None
+16.8129 	EXP 	slider: autoDraw = True
+16.8129 	EXP 	polygon: autoDraw = True
+17.6808 	DATA 	Mouse: Left button down, pos=(415,493)
+18.2618 	DATA 	Mouse:  Left button up, pos=(415,493)
+18.4554 	DATA 	Mouse: Left button down, pos=(415,493)
+20.8018 	DATA 	Mouse:  Left button up, pos=(933,282)
+21.1020 	DATA 	Mouse: Left button down, pos=(933,282)
+21.3286 	DATA 	Mouse:  Left button up, pos=(933,282)
+22.6163 	DATA 	Mouse: Left button down, pos=(431,380)
+22.8462 	DATA 	Mouse:  Left button up, pos=(431,380)
+23.7329 	DATA 	Mouse: Left button down, pos=(377,487)
+23.9448 	DATA 	Mouse:  Left button up, pos=(377,487)
+24.8176 	DATA 	Mouse: Left button down, pos=(305,456)
+25.0212 	DATA 	Mouse:  Left button up, pos=(305,456)
+25.5543 	DATA 	Mouse: Left button down, pos=(305,456)
+26.1179 	DATA 	Mouse:  Left button up, pos=(388,563)
+26.6675 	DATA 	Mouse: Left button down, pos=(705,343)
+28.4144 	DATA 	Mouse:  Left button up, pos=(77,307)
+32.0850 	DATA 	Keypress: escape
+32.7405 	EXP 	window1: mouseVisible = True

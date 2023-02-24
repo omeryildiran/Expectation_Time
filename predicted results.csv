@@ -1,0 +1,61 @@
+﻿Block Type,Expectation Congruency (Met/Unmet),Distractor Target Delay(D-T),Perceived Time Error
+No Expectation,None,-300,-50
+No Expectation,None,-233,-70
+No Expectation,None,-167,-60
+No Expectation,None,-100,-20
+No Expectation,None,-33,-30
+No Expectation,None,33,-10
+No Expectation,None,100,10
+No Expectation,None,167,50
+No Expectation,None,233,70
+No Expectation,None,300,40
+Moderate Expectation ,Met,-300,-90
+Moderate Expectation ,Met,-233,-80
+Moderate Expectation ,Met,-167,-70
+Moderate Expectation ,Met,-100,-80
+Moderate Expectation ,Met,-33,-73
+Moderate Expectation ,Met,33,-35
+Moderate Expectation ,Met,100,-45
+Moderate Expectation ,Met,167,-50
+Moderate Expectation ,Met,233,-60
+Moderate Expectation ,Met,300,-72
+High Expectation ,Met,-300,-98
+High Expectation ,Met,-233,-70
+High Expectation ,Met,-167,-60
+High Expectation ,Met,-100,-78
+High Expectation ,Met,-33,-63
+High Expectation ,Met,33,-55
+High Expectation ,Met,100,-33
+High Expectation ,Met,167,-40
+High Expectation ,Met,233,-30
+High Expectation ,Met,300,-61
+No Expectation,None,-300,-50
+No Expectation,None,-233,-70
+No Expectation,None,-167,-60
+No Expectation,None,-100,-20
+No Expectation,None,-33,-30
+No Expectation,None,33,-10
+No Expectation,None,100,10
+No Expectation,None,167,50
+No Expectation,None,233,70
+No Expectation,None,300,40
+Moderate Expectation ,Unmet,-300,93
+Moderate Expectation ,Unmet,-233,68
+Moderate Expectation ,Unmet,-167,58
+Moderate Expectation ,Unmet,-100,63
+Moderate Expectation ,Unmet,-33,68
+Moderate Expectation ,Unmet,33,-78
+Moderate Expectation ,Unmet,100,83
+Moderate Expectation ,Unmet,167,98
+Moderate Expectation ,Unmet,233,83
+Moderate Expectation ,Unmet,300,78
+High Expectation ,Unmet,-300,90
+High Expectation ,Unmet,-233,65
+High Expectation ,Unmet,-167,55
+High Expectation ,Unmet,-100,60
+High Expectation ,Unmet,-33,65
+High Expectation ,Unmet,33,75
+High Expectation ,Unmet,100,80
+High Expectation ,Unmet,167,95
+High Expectation ,Unmet,233,80
+High Expectation ,Unmet,300,75

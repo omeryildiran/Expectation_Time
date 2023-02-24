@@ -1,0 +1,17 @@
+3.1030 	WARNING 	We strongly recommend you activate the PTB sound engine in PsychoPy prefs as the preferred audio engine. Its timing is vastly superior. Your prefs are currently set to use ['sounddevice', 'PTB', 'pyo', 'pygame'] (in that order).
+6.7632 	EXP 	Created window1 = Window(allowGUI=True, allowStencil=False, autoLog=True, backendConf=UNKNOWN, bitsMode=UNKNOWN, blendMode='avg', bpc=(8, 8, 8), color=array([0, 0, 0]), colorSpace='rgb', depthBits=8, fullscr=<method-wrapper '__getattribute__' of attributeSetter object at 0x000001F0B330BA60>, gamma=None, gammaErrorPolicy='raise', lms=UNKNOWN, monitor=<psychopy.monitors.calibTools.Monitor object at 0x000001F0B84B5FA0>, multiSample=False, name='window1', numSamples=2, pos=(560, 140), screen=0, size=array([800, 800]), stencilBits=0, stereo=False, units='height', useFBO=True, useRetina=False, viewOri=0.0, viewPos=None, viewScale=None, waitBlanking=True, winType='pyglet')
+6.7633 	EXP 	window1: mouseVisible = True
+6.7634 	EXP 	window1: mouseVisible = True
+6.7634 	EXP 	window1: Attempting to measure frame rate of screen (0) ...
+6.7634 	EXP 	window1: recordFrameIntervals = False
+6.9289 	EXP 	window1: recordFrameIntervals = True
+7.1121 	EXP 	Screen (0) actual frame rate measured at 60.10Hz
+7.1122 	EXP 	window1: recordFrameIntervals = False
+7.1917 	WARNING 	launchHubServer: If using the iohub mouse or eyetracker devices, fullScr should be True.
+9.1949 	EXP 	window1: mouseVisible = True
+9.1994 	EXP 	Created polygon = ShapeStim(__class__=<class 'psychopy.visual.shape.ShapeStim'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=-3.0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([1, 1, 1]), lineColorSpace='rgb', lineRGB=array([1, 1, 1]), lineWidth=1.0, name='polygon', opacity=1.0, ori=0.0, pos=array([0., 0.]), size=array([0.1, 0.1]), units='height', vertices=ndarray(...), win=Window(...), windingRule=None)
+9.2154 	EXP 	polygon: autoDraw = True
+9.7319 	DATA 	Mouse: Left button down, pos=(340,239)
+16.7679 	DATA 	Mouse:  Left button up, pos=(466,388)
+19.9074 	DATA 	Keypress: escape
+20.6476 	EXP 	window1: mouseVisible = True

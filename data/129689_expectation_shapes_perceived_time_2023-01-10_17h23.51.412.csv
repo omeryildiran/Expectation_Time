@@ -1,0 +1,5 @@
+﻿famLoop.thisRepN,famLoop.thisTrialN,famLoop.thisN,famLoop.thisIndex,trials.thisRepN,trials.thisTrialN,trials.thisN,trials.thisIndex,audioCue2Start.started,handMove.started,handOri,handMove.ended,audioCue2End.started,target.started,target.stopped,participant,session,date,expName,psychopyVersion,frameRate,
+0,0,0,0,,,,,11.965471930000058,11.999319529999775,270.0,14.00080023000046,14.00080023000046,,,129689,001,2023-01-10_17h23.51.412,expectation_shapes_perceived_time,2022.2.4,59.31377520965005,
+,,,,0,0,0,0,,,,,,18.635086800000863,18.668773000001238,129689,001,2023-01-10_17h23.51.412,expectation_shapes_perceived_time,2022.2.4,59.92749971124631,
+,,,,1,0,1,0,,,,,,24.237659300000814,24.270874300000287,129689,001,2023-01-10_17h23.51.412,expectation_shapes_perceived_time,2022.2.4,59.66327242249645,
+,,,,,,,,,,,,,29.35671960000036,29.39011600000231,,,,,,,
