@@ -155,10 +155,10 @@ clockHand = visual.ShapeStim(
     ori=1.0, pos=(0, 0), anchor='bottom-center',
     lineWidth=4.0,     colorSpace='rgb',  lineColor='white', fillColor='white',
     opacity=None, depth=-4.0, interpolate=False)
-audioCue2Start = sound.Sound('audioCue2Init.wav', secs=-1, stereo=True, hamming=False,
+audioCue2Start = sound.Sound('A', secs=-1, stereo=True, hamming=False,
     name='audioCue2Start')
 audioCue2Start.setVolume(1.0)
-audioCue2End = sound.Sound('audioCue2Init.wav', secs=-1, stereo=True, hamming=False,
+audioCue2End = sound.Sound('A', secs=-1, stereo=True, hamming=False,
     name='audioCue2End')
 audioCue2End.setVolume(1.0)
 centreClock = visual.ShapeStim(
@@ -390,9 +390,9 @@ for thisFamLoop in famLoop:
     #oriPerFrame=360/frameReq
     #oriPerFrame=360/(2*fps)
     
-    audioCue2Start.setSound('audioCue2Init.wav', hamming=False)
+    audioCue2Start.setSound('A', hamming=False)
     audioCue2Start.setVolume(1.0, log=False)
-    audioCue2End.setSound('audioCue2Init.wav', hamming=False)
+    audioCue2End.setSound('A', hamming=False)
     audioCue2End.setVolume(1.0, log=False)
     # keep track of which components have finished
     famComponents = [clockOutDisk, clockHand, audioCue2Start, audioCue2End, centreClock]
@@ -725,8 +725,8 @@ for thisTrials in trialss:
     y_coord = np.random.uniform(-1,1)
 
     
-    #audioCue2Start.setSound('', secs=0.033, hamming=False)
-    #audioCue2Start.setVolume(1.0, log=False)
+    audioCue2Start.setSound('A', secs=0.033, hamming=False)
+    audioCue2Start.setVolume(1.0, log=False)
     distractor.setFillColor(distractor_color)
     distractor.setLineColor(distractor_color)
     # stim_color: color of stimuli in csv file trialList
@@ -919,6 +919,7 @@ for thisTrials in trialss:
         
 
         # *mouse* updates
+        #mouse_has_been_pressed = False
         if mouse.status == NOT_STARTED and frameN >= msToFrame(2500):
             # keep track of start time/frame for later
             mouse.setPos(newPos=(0,0))
@@ -929,7 +930,9 @@ for thisTrials in trialss:
             mouse.status = STARTED
             mouse.mouseClock.reset()
             prevButtonState = mouse.getPressed()  # if button is down already this ISN'T a new click
+            #released=mouse.getPressed()
 
+        #buttons=[]
         if mouse.status == STARTED:  # only update if started and not finished!
             #Get mouse position
             x_coord=mouse.getPos()[0]
@@ -937,7 +940,10 @@ for thisTrials in trialss:
             buttons = mouse.getPressed()
             if buttons != prevButtonState:  # button state changed?
                 prevButtonState = buttons
-                if sum(buttons) > 0:  # state changed to a new click
+                released=mouse.getPressed()
+                if sum(released) ==0:
+                #if len(buttons) > 1:  # state changed to a new click
+                    mouse_has_been_pressed = True
                     continueRoutine=False
                     # check if the mouse was inside our 'clickable' objects
                     gotValidClick = False
@@ -949,7 +955,7 @@ for thisTrials in trialss:
                     mouse.midButton.append(buttons[1])
                     mouse.rightButton.append(buttons[2])
                     mouse.time.append(mouse.mouseClock.getTime())
-        
+    
   
 
         
