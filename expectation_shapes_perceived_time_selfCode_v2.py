@@ -5,8 +5,8 @@
 import psychopy
 from psychopy import locale_setup
 from psychopy import prefs
-prefs.hardware['audioLib'] = 'PTB'
-prefs.hardware['audioLatencyMode'] = '4'
+#prefs.hardware['audioLib'] = 'PTB'
+#prefs.hardware['audioLatencyMode'] = '4'
 #from pysoundcard import Stream
 #from scipy.io.wavfile import read as wavread
 
@@ -723,8 +723,16 @@ for thisTrials in trialss:
     # #response
     x_coord = np.random.uniform(-1,1)
     y_coord = np.random.uniform(-1,1)
+    # random     #initial Position pointer location
+    x_coord_init = np.random.uniform(-1,1)
+    y_coord_init = np.random.uniform(-1,1)
+    x_coord_initPX=win.size[1]*x_coord_init
+    y_coord_initPX=win.size[1]*y_coord_init
+    hypoPx_init=math.sqrt(x_coord_initPX**2+y_coord_initPX**2)
+    x_coord_onCircle=(((x_coord_initPX/hypoPx_init)*sizeHandPix)/win.size[1])
+    y_coord_onCircle=(((y_coord_initPX/hypoPx_init)*sizeHandPix)/win.size[1])    
+    responsePointer.setPos((x_coord_onCircle,y_coord_onCircle),log=False)
 
-    
     audioCue2Start.setSound('A', secs=0.033, hamming=False)
     audioCue2Start.setVolume(1.0, log=False)
     distractor.setFillColor(distractor_color)
@@ -935,6 +943,9 @@ for thisTrials in trialss:
         #buttons=[]
         if mouse.status == STARTED:  # only update if started and not finished!
             #Get mouse position
+            x, y = mouse.getPos()
+            mouse.x.append(x)
+            mouse.y.append(y)
             x_coord=mouse.getPos()[0]
             y_coord=mouse.getPos()[1]
             buttons = mouse.getPressed()
@@ -947,18 +958,14 @@ for thisTrials in trialss:
                     continueRoutine=False
                     # check if the mouse was inside our 'clickable' objects
                     gotValidClick = False
-                    x, y = mouse.getPos()
-                    mouse.x.append(x)
-                    mouse.y.append(y)
+
                     buttons = mouse.getPressed()
                     mouse.leftButton.append(buttons[0])
                     mouse.midButton.append(buttons[1])
                     mouse.rightButton.append(buttons[2])
                     mouse.time.append(mouse.mouseClock.getTime())
     
-  
 
-        
         # *responsePointer* updates
         respX_px=win.size[1]*x_coord   # Coordinate of response X in Pixel 
         respY_px=win.size[1]*y_coord   # Coordinate of response Y in Pixel
@@ -973,15 +980,17 @@ for thisTrials in trialss:
             thisExp.addData('responsePointer.started',t)
             responsePointer.setAutoDraw(True)
         if responsePointer.status == STARTED:  # only update if drawing
-            if hypoPx==0:
-                responsePointer.setPos((0,0),log=False)
-            else:
+            if mouse.x[0]!=x or mouse.y[0]!=y:
                 x_coord_onCircle=(((respX_px/hypoPx)*sizeHandPix)/win.size[1])
                 y_coord_onCircle=(((respY_px/hypoPx)*sizeHandPix)/win.size[1])              
                 responsePointer.setPos((x_coord_onCircle,y_coord_onCircle),log=False)
                 perceivedTime=coord2time(x_coord_onCircle,y_coord_onCircle)
                 pTemporalError=perceivedTime-initIntervalMs
-                #responsePointer.setPos(((((respX_px/hypoPx)*sizeHandPix)/win.size[1]), (((respY_px/hypoPx)*sizeHandPix)/win.size[1])), log=False)
+            #else: 
+                # x_coord_onCircle=(((x_coord_initPX/hypoPx_init)*sizeHandPix)/win.size[1])
+                # y_coord_onCircle=(((y_coord_initPX/hypoPx_init)*sizeHandPix)/win.size[1])    
+                # responsePointer.setPos((x_coord_onCircle,y_coord_onCircle),log=False)
+
             if continueRoutine == False:
                 responsePointer.tStop= t  # local t and not account for scr refresh
                 responsePointer.frameNstop=frameN
