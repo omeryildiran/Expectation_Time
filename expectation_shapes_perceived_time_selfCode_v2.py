@@ -360,7 +360,7 @@ for thisComponent in welcomeScrComponents:
 routineTimer.reset()
 
 # set up handler to look after randomisation of conditions etc
-famLoop = data.TrialHandler(nReps=0.0, method='random', 
+famLoop = data.TrialHandler(nReps=1.0, method='random', 
     extraInfo=expInfo, originPath=-1,
     trialList=[None],
     seed=None, name='famLoop')
@@ -390,9 +390,9 @@ for thisFamLoop in famLoop:
     #oriPerFrame=360/frameReq
     #oriPerFrame=360/(2*fps)
     
-    audioCue2Start.setSound('A', hamming=False)
+    audioCue2Start.setSound('A',secs=0.033, hamming=False)
     audioCue2Start.setVolume(1.0, log=False)
-    audioCue2End.setSound('A', hamming=False)
+    audioCue2End.setSound('A', secs=0.033, hamming=False)
     audioCue2End.setVolume(1.0, log=False)
     # keep track of which components have finished
     famComponents = [clockOutDisk, clockHand, audioCue2Start, audioCue2End, centreClock]
@@ -657,7 +657,7 @@ for thisFamLoop in famLoop:
     
 # completed 0.0 repeats of 'famLoop'
 
-
+## ---- Prepare to start routine Trial ---
 # set up handler to look after randomisation of conditions etc
 trialss = data.TrialHandler(nReps=1.0, method='random', 
     extraInfo=expInfo, originPath=-1,

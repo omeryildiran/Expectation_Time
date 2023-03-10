@@ -785,7 +785,7 @@ for thisTrials in trialss:
             win.timeOnFlip(placeholder, 'tStartRefresh')  # time at next scr refresh
             placeholder.setAutoDraw(True)
         if placeholder.status == STARTED:  # only update if drawing
-            placeholder.setFillColor('', log=False)
+            placeholder.setFillColor('tr', log=False)
         # start/stop audCueEnd
         if audCueEnd.status == NOT_STARTED and frameN >= 120+preTrialInterval:
             # keep track of start time/frame for later
