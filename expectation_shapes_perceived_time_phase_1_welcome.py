@@ -147,11 +147,18 @@ except NameError:
 try:
     this_text=this_text
 except NameError:
-    this_text="Welcome to the experiemnt,\nPress 'Space' to start familiarizing with trial time intervals."# --- Initialize components for Routine "welcomeScr" ---
+    this_text="Welcome to our experiment on the effect of expectation on the perceived moment of time. "\
+        "In this experiment, you will see two disks on the screen that will be flashed consecutively, one after the other. Your task is to report the onset time of one of these disks at the end of each trial. "\
+            "Please carefully read the instructions and follow them throughout the experiment."\
+            "In this phase, you will be familiarized with the clock that will be used in the experiment."\
+                 " The clock will rotate its hand 360 degrees for 2 seconds. You will see a millisecond hand on the clock during this phase. Please pay attention to the clock and the hand movement."\
+                 "To start familiarization phase press 'space' button"
+
+
 welcomeTxt = visual.TextStim(win=win, name='welcomeTxt',
     text=this_text,
     font='Open Sans',
-    pos=(0, 0), height=0.03, wrapWidth=None, ori=0.0, 
+    pos=(0, 0), height=0.025, wrapWidth=None, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
     depth=0.0);

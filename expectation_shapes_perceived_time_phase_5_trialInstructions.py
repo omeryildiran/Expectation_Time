@@ -146,9 +146,14 @@ except NameError:
 standAlone=True
 # --- Initialize components for Routine "welcomeScr" ---
 welcomeTxt = visual.TextStim(win=win, name='welcomeTxt',
-    text="Here comes the actual experiment trials. Get Ready and press 'space' to start!\nIf you dont feel confident enough you can press 'left' key to redo the test trials",
+    text="Here comes the actual experiment trials. If you dont feel confident enough you can press 'left' key to redo the test trials\n"\
+    "In this phase, you will see two disks on the screen, one red and one green."\
+    "Only one of these disks will be the target stimulus, which will be shown at the response phase. "\
+    "You will be asked to report the onset time of the target disk only by clicking on the clock circle. "\
+    "Please click on the circle to indicate the perceived onset time of the target disk."\
+    "Get Ready and press 'space' to start!",
     font='Open Sans',
-    pos=(0, 0), height=0.03, wrapWidth=None, ori=0.0, 
+    pos=(0, 0), height=0.025, wrapWidth=None, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
     depth=0.0);
