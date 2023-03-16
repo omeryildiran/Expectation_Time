@@ -143,7 +143,7 @@ except NameError:
 
 ### End initiator run
 ## Start EXP
-
+standAlone=True
 # --- Initialize components for Routine "welcomeScr" ---
 welcomeTxt = visual.TextStim(win=win, name='welcomeTxt',
     text="Thats the test phase go test yourself.",
@@ -207,7 +207,7 @@ while continueRoutine:
         win.callOnFlip(skipWelcome.clock.reset)  # t=0 on next screen flip
         win.callOnFlip(skipWelcome.clearEvents, eventType='keyboard')  # clear events on next screen flip
     if skipWelcome.status == STARTED and not waitOnFlip:
-        theseKeys = skipWelcome.getKeys(keyList=['space'], waitRelease=False)
+        theseKeys = skipWelcome.getKeys(keyList=['space','left'], waitRelease=False)
         _skipWelcome_allKeys.extend(theseKeys)
         if len(_skipWelcome_allKeys):
             skipWelcome.keys = _skipWelcome_allKeys[-1].name  # just the last key pressed

@@ -74,7 +74,7 @@ except NameError:
 
     # --- Setup the Window ---
     win = visual.Window(
-        size=[1020,720], fullscr=False, screen=0, 
+        size=[800,800], fullscr=True, screen=0, 
         winType='pyglet', allowStencil=False,
         monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
         blendMode='avg', useFBO=True, 
@@ -143,10 +143,10 @@ except NameError:
 
 ### End initiator run
 ## Start EXP
-
+standAlone=True
 # --- Initialize components for Routine "welcomeScr" ---
 welcomeTxt = visual.TextStim(win=win, name='welcomeTxt',
-    text="Here comes the actual experiment trials. Get Ready!",
+    text="Here comes the actual experiment trials. Get Ready and press 'space' to start!\nIf you dont feel confident enough you can press 'left' key to redo the test trials",
     font='Open Sans',
     pos=(0, 0), height=0.03, wrapWidth=None, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
@@ -174,68 +174,78 @@ for thisComponent in welcomeScrComponents:
 t = 0
 _timeToFirstFrame = win.getFutureFlipTime(clock="now")
 frameN = -1
+againTest=True
+while againTest==True:
+    againTest=False
 
-# --- Run Routine "welcomeScr" ---
-while continueRoutine:
-    # get current time
-    t = routineTimer.getTime()
-    tThisFlip = win.getFutureFlipTime(clock=routineTimer)
-    tThisFlipGlobal = win.getFutureFlipTime(clock=None)
-    frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
-    # update/draw components on each frame
-    
-    # *welcomeTxt* updates
-    if welcomeTxt.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-        # keep track of start time/frame for later
-        welcomeTxt.frameNStart = frameN  # exact frame index
-        welcomeTxt.tStart = t  # local t and not account for scr refresh
-        welcomeTxt.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(welcomeTxt, 'tStartRefresh')  # time at next scr refresh
-        welcomeTxt.setAutoDraw(True)
-    
-    # *skipWelcome* updates
-    waitOnFlip = False
-    if skipWelcome.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-        # keep track of start time/frame for later
-        skipWelcome.frameNStart = frameN  # exact frame index
-        skipWelcome.tStart = t  # local t and not account for scr refresh
-        skipWelcome.tStartRefresh = tThisFlipGlobal  # on global time
-        win.timeOnFlip(skipWelcome, 'tStartRefresh')  # time at next scr refresh
-        skipWelcome.status = STARTED
-        # keyboard checking is just starting
-        waitOnFlip = True
-        win.callOnFlip(skipWelcome.clock.reset)  # t=0 on next screen flip
-        win.callOnFlip(skipWelcome.clearEvents, eventType='keyboard')  # clear events on next screen flip
-    if skipWelcome.status == STARTED and not waitOnFlip:
-        theseKeys = skipWelcome.getKeys(keyList=['space'], waitRelease=False)
-        _skipWelcome_allKeys.extend(theseKeys)
-        if len(_skipWelcome_allKeys):
-            skipWelcome.keys = _skipWelcome_allKeys[-1].name  # just the last key pressed
-            skipWelcome.rt = _skipWelcome_allKeys[-1].rt
-            # a response ends the routine
-            continueRoutine = False
-    
-    # check for quit (typically the Esc key)
-    if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
-        core.quit()
-    
-    # check if all components have finished
-    if not continueRoutine:  # a component has requested a forced-end of Routine
-        routineForceEnded = True
-        break
-    continueRoutine = False  # will revert to True if at least one component still running
+    # --- Run Routine "welcomeScr" ---
+    while continueRoutine:
+        # get current time
+        t = routineTimer.getTime()
+        tThisFlip = win.getFutureFlipTime(clock=routineTimer)
+        tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+        frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+        # update/draw components on each frame
+        
+        # *welcomeTxt* updates
+        if welcomeTxt.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            welcomeTxt.frameNStart = frameN  # exact frame index
+            welcomeTxt.tStart = t  # local t and not account for scr refresh
+            welcomeTxt.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(welcomeTxt, 'tStartRefresh')  # time at next scr refresh
+            welcomeTxt.setAutoDraw(True)
+        
+        # *skipWelcome* updates
+        waitOnFlip = False
+        if skipWelcome.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            skipWelcome.frameNStart = frameN  # exact frame index
+            skipWelcome.tStart = t  # local t and not account for scr refresh
+            skipWelcome.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(skipWelcome, 'tStartRefresh')  # time at next scr refresh
+            skipWelcome.status = STARTED
+            # keyboard checking is just starting
+            waitOnFlip = True
+            win.callOnFlip(skipWelcome.clock.reset)  # t=0 on next screen flip
+            win.callOnFlip(skipWelcome.clearEvents, eventType='keyboard')  # clear events on next screen flip
+        if skipWelcome.status == STARTED and not waitOnFlip:
+            theseKeys = skipWelcome.getKeys(keyList=['space','left'], waitRelease=False)
+            _skipWelcome_allKeys.extend(theseKeys)
+            if len(_skipWelcome_allKeys):
+                skipWelcome.keys = _skipWelcome_allKeys[-1].name  # just the last key pressed
+                skipWelcome.rt = _skipWelcome_allKeys[-1].rt
+                if skipWelcome.keys=='left':
+                    continueRoutine = False
+                    againTest=True
+                else:
+                    # a response ends the routine
+                    continueRoutine = False
+        
+        # check for quit (typically the Esc key)
+        if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
+            core.quit()
+        
+        # check if all components have finished
+        if not continueRoutine:  # a component has requested a forced-end of Routine
+            routineForceEnded = True
+            break
+        continueRoutine = False  # will revert to True if at least one component still running
+        for thisComponent in welcomeScrComponents:
+            if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                continueRoutine = True
+                break  # at least one component has not yet finished
+        
+        # refresh the screen
+        if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+            win.flip()
+
+    # --- Ending Routine "welcomeScr" ---
     for thisComponent in welcomeScrComponents:
-        if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
-            continueRoutine = True
-            break  # at least one component has not yet finished
-    
-    # refresh the screen
-    if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
-        win.flip()
-
-# --- Ending Routine "welcomeScr" ---
-for thisComponent in welcomeScrComponents:
-    if hasattr(thisComponent, "setAutoDraw"):
-        thisComponent.setAutoDraw(False)
-# the Routine "welcomeScr" was not non-slip safe, so reset the non-slip timer
-routineTimer.reset()
+        if hasattr(thisComponent, "setAutoDraw"):
+            thisComponent.setAutoDraw(False)
+    # the Routine "welcomeScr" was not non-slip safe, so reset the non-slip timer
+    routineTimer.reset()
+    if againTest==True:
+        rep_test=5
+        exec(open("expectation_shapes_perceived_time_phase_4_test.py").read())

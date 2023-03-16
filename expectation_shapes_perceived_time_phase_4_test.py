@@ -226,7 +226,7 @@ fixation_opacity=1
 try:
     rep_test=rep_test
 except NameError:
-    rep_fam=10
+    rep_test=10
 trialss = data.TrialHandler(nReps=rep_test, method='random', 
     extraInfo=expInfo, originPath=-1,
     trialList=[None],
@@ -309,14 +309,15 @@ for thisTrials in trialss:
     target.setLineColor(targetColor)
     cueForRep.setFillColor(targetColor)
     cueForRep.setLineColor(targetColor)
-    audCueEnd.setSound('A', secs=0.033, hamming=False)
+    audCueEnd.setSound('audioCue2Init.wav', secs=0.033, hamming=False)
     audCueEnd.setVolume(1.0, log=False)
-    #audCueStart.setSound('A', secs=0.033, hamming=False)
+    audCueStart.setSound('audioCue2Init.wav', secs=0.033, hamming=False)
     audCueStart.setVolume(1.0, log=False)
     sapce2pass_2.keys = []
     sapce2pass_2.rt = []
     _sapce2pass_2_allKeys = []
-    fixationPoint.setFillColor
+    feedbackPointer.setFillColor(targetColor)
+    feedbackPointer.setLineColor(targetColor)
     # Run 'Begin Routine' code from fixOpacitiy
     fixation_opacity=1
     i=0
@@ -425,8 +426,11 @@ for thisTrials in trialss:
             if cueForRep.autoDraw==True or target.autoDraw == True:
                 placeholder.setAutoDraw(False)
                 placeholder.status=STARTED
-            elif frameN>= totalTrialDurationFrame+preTrialIntervalFrame:
+            elif frameN>= totalTrialDurationFrame:
                 placeholder.setAutoDraw(False)
+                fixationPoint.setAutoDraw(True)
+                fixationPoint.status=NOT_STARTED
+
                 placeholder.status=STARTED
             else:
                 placeholder.setAutoDraw(True)
@@ -575,6 +579,7 @@ for thisTrials in trialss:
                     
         #### ------- Updates for PostCue ------
         if cueForRep.status == NOT_STARTED and frameN >= totalTrialDurationFrame+apreTrialIntervalFrame:
+            fixationPoint.setAutoDraw(False )
             cueForRep.setAutoDraw(True)
             thisExp.addData('cueForRep.started', t)
 

@@ -241,9 +241,9 @@ for thisFamLoop in famLoop:
     sapce2pass.rt = []
     _sapce2pass_allKeys = []
 
-    audioCue2Start.setSound('A',secs=0.033, hamming=False)
+    audioCue2Start.setSound('audioCue2Init.wav',secs=0.033, hamming=False)
     audioCue2Start.setVolume(1.0, log=False)
-    audioCue2End.setSound('A', secs=0.033,hamming=False)
+    audioCue2End.setSound('audioCue2Init.wav', secs=0.033,hamming=False)
     audioCue2End.setVolume(1.0, log=False)
     # keep track of which components have finished
     famComponents = [clockOutDisk, clockHand, audioCue2Start, audioCue2End, centreClock,sapce2pass,continueFam]

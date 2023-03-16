@@ -217,12 +217,22 @@ fixation_opacity=1
 
 ### --- Components added
 
+def condition_selecter(condition="trials_no_exp.csv"):
+    return condition
+condition_list=condition_selecter
+
+try:
+    expBlock=expBlock
+    rep_trial=rep_trial
+except NameError:
+    expBlock="trials_no_exp.csv"
+    rep_trial=2
 
 ## ---- Prepare to start routine Trial ---
 # set up handler to look after randomisation of conditions etc
-trialss = data.TrialHandler(nReps=1.0, method='random', 
+trialss = data.TrialHandler(nReps=rep_trial, method='random', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions('high_exp_trials.csv'),
+    trialList=data.importConditions(expBlock),
     seed=None, name='trialss')
 thisExp.addLoop(trialss)  # add the loop to the experiment
 thisTrials = trialss.trialList[0]  # so we can initialise stimuli with some values
@@ -233,18 +243,21 @@ if thisTrials != None:
         exec('{} = thisTrials[paramName]'.format(paramName))
 #trialss.thisN=298
 #trialss.thisTrialN=298
-
-# notForgetTime=0
+standAlone=True
+notForgetTime=0
 for thisTrials in trialss:
-#     ## Run familiarization if participant did more than 10 trial
-#     notForgetTime+=1
-#     if notForgetTime==10:
-#         exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
-#         rep_fam=1
-#         exec(open("expectation_shapes_perceived_time_phase_2_familiarization.py").read())
-#         rep_test=1
-#         exec(open("expectation_shapes_perceived_time_phase_4_test.py").read())
-#         notForgetTime=0
+    ## Run familiarization if participant did more than 10 trial
+    notForgetTime+=1
+    blockNumber=0
+    if notForgetTime==50:
+        blockNumber+=1
+        this_text="You have done "+str(blockNumber)+" out of"+str(rep_trial*2)+ " blocks. Now it is time to have a break for at least 10 second and familiarize again with the time interval.\nWhenever you are ready Press 'space' to start familiarization"
+        exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
+        rep_fam=5
+        exec(open("expectation_shapes_perceived_time_phase_2_familiarization.py").read())
+        this_text="Now you can continue the trials.\nPress 'Space' to go!"
+        exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
+        notForgetTime=0
     thisExp.addData("isTrial","trial")
     win.setMouseVisible(False)
     currentLoop = trialss
@@ -329,9 +342,9 @@ for thisTrials in trialss:
     target.setLineColor(stim_color)
     cueForRep.setFillColor(stim_color)
     cueForRep.setLineColor(stim_color)
-    audCueEnd.setSound('A', secs=0.033, hamming=False)
+    audCueEnd.setSound('audioCue2Init.wav', secs=0.033, hamming=False)
     audCueEnd.setVolume(1.0, log=False)
-    audCueStart.setSound('A', secs=0.033, hamming=False)
+    audCueStart.setSound('audioCue2Init.wav', secs=0.033, hamming=False)
     audCueStart.setVolume(1.0, log=False)
     space2pass.keys = []
     space2pass.rt = []
@@ -389,7 +402,7 @@ for thisTrials in trialss:
             # add timestamp to datafile
             thisExp.addData('fixationPoint.started',t)
             fixationPoint.setAutoDraw(True)
-        if fixationPoint.status == STARTED:
+        if fixationPoint.status == STARTED and fixationEnded==False:
         #Code for changing fixation opacity
             #fixationPoint.setOpacity(fixation_opacity, log=False)
             #fColor=fColor-0.0085
@@ -451,8 +464,10 @@ for thisTrials in trialss:
             if cueForRep.autoDraw==True or target.autoDraw == True:
                 placeholder.setAutoDraw(False)
                 placeholder.status=STARTED
-            elif frameN>= totalTrialDurationFrame+preTrialIntervalFrame:
+            elif frameN>= totalTrialDurationFrame:
                 placeholder.setAutoDraw(False)
+                #if cueForRep==NOT_STARTED:
+                fixationPoint.setAutoDraw(True)
                 placeholder.status=STARTED
             else:
                 placeholder.setAutoDraw(True)
@@ -547,6 +562,7 @@ for thisTrials in trialss:
             space2pass.clock.reset()  # now t=0
             space2pass.clearEvents(eventType='keyboard')
         if space2pass.status == STARTED:
+            #continueRoutine = False # a response ends the routine
             theseKeys = space2pass.getKeys(keyList=['space'], waitRelease=False)
             _space2pass_allKeys.extend(theseKeys)
             if len(_space2pass_allKeys):
@@ -628,8 +644,11 @@ for thisTrials in trialss:
                     
         #### ------- Updates for PostCue ------
         if cueForRep.status == NOT_STARTED and frameN >= totalTrialDurationFrame+apreTrialIntervalFrame:
+            fixationPoint.setAutoDraw(False )
             cueForRep.setAutoDraw(True)
+
             thisExp.addData('cueForRep.started', t)
+
 
         if cueForRep.status == STARTED:
             if continueRoutine == False:

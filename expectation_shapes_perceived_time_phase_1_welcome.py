@@ -144,9 +144,12 @@ except NameError:
 ### End initiator run
 ## Start EXP
 
-# --- Initialize components for Routine "welcomeScr" ---
+try:
+    this_text=this_text
+except NameError:
+    this_text="Welcome to the experiemnt,\nPress 'Space' to start familiarizing with trial time intervals."# --- Initialize components for Routine "welcomeScr" ---
 welcomeTxt = visual.TextStim(win=win, name='welcomeTxt',
-    text="Welcome to the experiemnt,\nPress 'Space' to start familiarizing with trial time intervals.",
+    text=this_text,
     font='Open Sans',
     pos=(0, 0), height=0.03, wrapWidth=None, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
