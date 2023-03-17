@@ -19,7 +19,7 @@ exec(open("expectation_shapes_perceived_time_0_initiateExp.py").read())
 # 1 - Welcome Screen
 exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
 # 2 - Familiarization
-rep_fam=10
+rep_fam=20
 exec(open("expectation_shapes_perceived_time_phase_2_familiarization.py").read())
 # 3 - Test instructions
 exec(open("expectation_shapes_perceived_time_phase_3_testInstructions.py").read())

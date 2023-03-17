@@ -246,19 +246,25 @@ if thisTrials != None:
 standAlone=True
 notForgetTime=0
 blockNumber=0
-
+this_text="Just before starting lets again shortly remember the clock"
+exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
+rep_fam=2
+exec(open("expectation_shapes_perceived_time_phase_2_familiarization.py").read())
+this_text="Now you can start the trials.\nPress 'Space' to go!"
+exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
 for thisTrials in trialss:
     ## Run familiarization if participant did more than 10 trial
-    notForgetTime+=1
-    if notForgetTime==50:
+    if notForgetTime==25:
         blockNumber+=1
-        this_text="You have done "+str(blockNumber)+" out of"+str(rep_trial*2)+ " blocks. Now it is time to have a break for at least 10 second and familiarize again with the time interval.\nWhenever you are ready Press 'space' to start familiarization"
+        this_text="You have done "+str(blockNumber)+" out of"+str(rep_trial*4)+ " blocks. Now it is time to have a break for at least 10 second and familiarize again with the time interval.\nWhenever you are ready Press 'space' to start familiarization"
         exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
-        rep_fam=10
+        rep_fam=4
         exec(open("expectation_shapes_perceived_time_phase_2_familiarization.py").read())
         this_text="Now you can continue the trials.\nPress 'Space' to go!"
         exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
         notForgetTime=0
+    notForgetTime+=1
+
     thisExp.addData("isTrial","trial")
     win.setMouseVisible(False)
     currentLoop = trialss
