@@ -1,0 +1,24 @@
+{
+	"nodes":[
+		{"type":"file","file":"Experiment Flow/0.0-Experiment Screen Inititator.md","id":"47c34a473ccb7e9c","x":-880,"y":-580,"width":400,"height":400},
+		{"type":"file","file":"Experiment Flow/0-Organized runner.md","id":"a6aae3d93fca8eb0","x":-1380,"y":-260,"width":400,"height":400},
+		{"type":"file","file":"Experiment Flow/1. Welcome Screen.md","id":"8c1753e273315928","x":-314,"y":-660,"width":400,"height":400},
+		{"type":"file","file":"Experiment Flow/5. Trial instructions.md","id":"eff4124a6296b79f","x":-400,"y":620,"width":400,"height":400},
+		{"type":"file","file":"Experiment Flow/4.Test.md","id":"843b31a1192c8171","x":120,"y":508,"width":400,"height":400},
+		{"type":"file","file":"Experiment Flow/3. Test Instruction.md","id":"59a0fea86ccfd36c","x":320,"y":-60,"width":400,"height":400},
+		{"type":"file","file":"Experiment Flow/2.Familiarization.md","id":"52eafb293cdab0e8","x":-400,"y":20,"width":440,"height":380},
+		{"id":"79a08b49405b0375","x":-1680,"y":308,"width":400,"height":400,"type":"file","file":"Experiment Flow/7. End of Experiment.md"},
+		{"id":"75f36264da1e29f0","x":-1080,"y":474,"width":500,"height":692,"type":"file","file":"Experiment Flow/6. Trial.md"}
+	],
+	"edges":[
+		{"id":"62c545433fb4b5f3","fromNode":"8c1753e273315928","fromSide":"right","toNode":"52eafb293cdab0e8","toSide":"left"},
+		{"id":"db34fc543a821a4c","fromNode":"52eafb293cdab0e8","fromSide":"right","toNode":"59a0fea86ccfd36c","toSide":"left"},
+		{"id":"2e85fa1b34ae404d","fromNode":"59a0fea86ccfd36c","fromSide":"bottom","toNode":"843b31a1192c8171","toSide":"right"},
+		{"id":"812e554b8d61d72a","fromNode":"47c34a473ccb7e9c","fromSide":"right","toNode":"8c1753e273315928","toSide":"left"},
+		{"id":"c050a6a9bfdde554","fromNode":"a6aae3d93fca8eb0","fromSide":"right","toNode":"47c34a473ccb7e9c","toSide":"left"},
+		{"id":"6c7b75d4017292be","fromNode":"eff4124a6296b79f","fromSide":"left","toNode":"75f36264da1e29f0","toSide":"right"},
+		{"id":"4dc3ea79a5edc221","fromNode":"75f36264da1e29f0","fromSide":"left","toNode":"79a08b49405b0375","toSide":"right"},
+		{"id":"ce5074784d2ae134","fromNode":"843b31a1192c8171","fromSide":"left","toNode":"eff4124a6296b79f","toSide":"right"},
+		{"id":"b82c9f4f06c5eeb4","fromNode":"75f36264da1e29f0","fromSide":"top","toNode":"52eafb293cdab0e8","toSide":"left","fromEnd":"arrow","color":"3","label":"For each 25 trial 4 Familiarization"}
+	]
+}
