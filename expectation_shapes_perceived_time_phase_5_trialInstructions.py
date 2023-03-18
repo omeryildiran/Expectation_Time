@@ -102,12 +102,12 @@ except NameError:
     defaultKeyboard = keyboard.Keyboard(backend='iohub')
     # # ----- Variables and Parameters ----- 
     fColor=1
-    sizeHand=2.5
+    sizeHand=5#2.5
     sizeHandPix=monitorunittools.deg2pix(degrees=sizeHand,monitor=win.monitor)
     sizeClockCentre=0.5# =fixation point
-    sizePlaceholder=1
+    sizePlaceholder=2#1
     diskSize=sizePlaceholder
-    pointer_size=monitorunittools.deg2pix(degrees=0.3,monitor=win.monitor)/win.size[1]
+    pointer_size=monitorunittools.deg2pix(degrees=sizeClockCentre,monitor=win.monitor)/win.size[1]
     # Run 'Begin Experiment' code from secToFrame
     expInfo['frameRate'] = win.getActualFrameRate()
     fps=expInfo['frameRate']
@@ -226,7 +226,7 @@ while againTest==True:
                 else:
                     # a response ends the routine
                     continueRoutine = False
-        
+
         # check for quit (typically the Esc key)
         if endExpNow or defaultKeyboard.getKeys(keyList=["escape"]):
             core.quit()
@@ -245,12 +245,13 @@ while againTest==True:
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
 
-    # --- Ending Routine "welcomeScr" ---
     for thisComponent in welcomeScrComponents:
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
-    # the Routine "welcomeScr" was not non-slip safe, so reset the non-slip timer
-    routineTimer.reset()
     if againTest==True:
         rep_test=5
         exec(open("expectation_shapes_perceived_time_phase_4_test.py").read())
+        exec(open("expectation_shapes_perceived_time_phase_5_trialInstructions.py").read())
+    # --- Ending Routine "welcomeScr" ---
+    # the Routine "welcomeScr" was not non-slip safe, so reset the non-slip ti mer
+    routineTimer.reset()

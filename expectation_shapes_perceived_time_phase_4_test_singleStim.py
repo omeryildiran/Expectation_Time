@@ -141,6 +141,8 @@ except NameError:
     routineTimer = core.Clock()  # to track time remaining of each (possibly non-slip) routine 
 
 ### End initiator run
+from time2coord import time2coord
+
 
 ## --- Start Trial Routine --- 
 # # --- Initialize components for Routine "trial" ---
@@ -163,6 +165,7 @@ responsePointer = visual.ShapeStim(
     lineWidth=1.0,     colorSpace='rgb',  lineColor='white', fillColor='white',
     opacity=None, depth=-4.0, interpolate=True)
 
+
 # Create some handy timers
 # Run 'Begin Experiment' code from timingVars
 
@@ -178,12 +181,7 @@ outerDisk = visual.ShapeStim(
     ori=0.0, pos=(0, 0), anchor='center',
     lineWidth=3.5,     colorSpace='rgb',  lineColor='white', fillColor=None,
     opacity=None, depth=-3.0, interpolate=False)
-distractor = visual.ShapeStim(
-    win=win, name='distractor',units='deg', 
-    size=(diskSize,diskSize), vertices='circle',
-    ori=0.0, pos=(0, 0), anchor='center',
-    lineWidth=2.0,     colorSpace='rgb',  lineColor='white', fillColor='white',
-    opacity=None, depth=-5.0, interpolate=False)
+
 target = visual.ShapeStim(
     win=win, name='target',units='deg', 
     size=(diskSize,diskSize), vertices='circle',
@@ -206,7 +204,7 @@ placeholder = visual.ShapeStim(
 audCueEnd = sound.Sound('A', secs=0.033, stereo=True, hamming=False,
     name='audCueEnd')
 audCueEnd.setVolume(1.0)
-space2pass = keyboard.Keyboard()
+sapce2pass_2 = keyboard.Keyboard()
 fixationPoint = visual.ShapeStim(
     win=win, name='fixationPoint', vertices='circle', 
     size=(pointer_size, pointer_size),
@@ -217,62 +215,31 @@ fixation_opacity=1
 
 ### --- Components added
 
-def condition_selecter(condition="trials_no_exp.csv"):
-    return condition
-condition_list=condition_selecter
-
-try:
-    expBlock=expBlock
-    rep_trial=rep_trial
-except NameError:
-    expBlock="trials_no_exp.csv"
-    rep_trial=2
-
 ## ---- Prepare to start routine Trial ---
 # set up handler to look after randomisation of conditions etc
-trialss = data.TrialHandler(nReps=rep_trial, method='random', 
+try:
+    rep_test=rep_test
+except NameError:
+    rep_test=10
+trialss = data.TrialHandler(nReps=rep_test, method='random', 
     extraInfo=expInfo, originPath=-1,
-    trialList=data.importConditions(expBlock),
+    trialList=[None],
     seed=None, name='trialss')
 thisExp.addLoop(trialss)  # add the loop to the experiment
 thisTrials = trialss.trialList[0]  # so we can initialise stimuli with some values
 # abbreviate parameter names if possible (e.g. rgb = thisTrials.rgb)
-
 if thisTrials != None:
     for paramName in thisTrials:
         exec('{} = thisTrials[paramName]'.format(paramName))
-#trialss.thisN=298
-#trialss.thisTrialN=298
-standAlone=True
-notForgetTime=0
-blockNumber=0
-this_text="Just before starting lets again shortly remember the clock"
-exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
-rep_fam=5
-exec(open("expectation_shapes_perceived_time_phase_2_familiarization.py").read())
-this_text="Now you can start the trials.\nPress 'Space' to go!"
-exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
-for thisTrials in trialss:
-    ## Run familiarization if participant did more than 10 trial
-    if notForgetTime==25:
-        blockNumber+=1
-        this_text="You have done "+str(blockNumber)+" out of"+str(rep_trial*4)+ " blocks. Now it is time to have a break for at least 10 second and familiarize again with the time interval.\nWhenever you are ready Press 'space' to start familiarization"
-        exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
-        rep_fam=5
-        exec(open("expectation_shapes_perceived_time_phase_2_familiarization.py").read())
-        this_text="Now you can continue the trials.\nPress 'Space' to go!"
-        exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
-        notForgetTime=0
-    notForgetTime+=1
 
-    thisExp.addData("isTrial","trial")
+for thisTrials in trialss:
     win.setMouseVisible(False)
     currentLoop = trialss
     # abbreviate parameter names if possible (e.g. rgb = thisTrials.rgb)
     if thisTrials != None:
         for paramName in thisTrials:
             exec('{} = thisTrials[paramName]'.format(paramName))
-
+    thisExp.addData("isTrial","test")
     # --- Prepare to start Routine "trial" ---
     continueRoutine = True
     routineForceEnded = False
@@ -293,9 +260,9 @@ for thisTrials in trialss:
     _key_resp_allKeys = []
     # update component parameters for each repeat
     # Run 'Begin Routine' code from pickTargetCol
-    #shuffle(stimColors)
+    shuffle(stimColors)
     targetColor=stimColors[0]
-    distractorColor=stimColors[1]    
+
     # Run 'Begin Routine' code from timingVars
     durS1=msToFrame(33)
     durS2=msToFrame(33)
@@ -303,31 +270,21 @@ for thisTrials in trialss:
     ### Timing of objects
     preTrialIntervalMs=500
     preTrialIntervalFrame=msToFrame(preTrialIntervalMs)
-    #initIntervalMs=np.random.uniform(450,1250) # Target onset relative to start of trial
-    #midInterval=msToFrame(midInterval[0])
-    isiMs=delay
-    isiFrame=msToFrame(delay)
-    isiFrameCorrected=isiFrame*(isiMs/isiMs)
-    if isiMs>0:
-        initIntervalMs=np.random.uniform(150,(1850-isiMs)) # Target onset relative to start of trial
-    elif isiMs<0:
-        initIntervalMs=np.random.uniform((150-isiMs),1850) # Target onset relative to start of trial
-
+    initIntervalMs=np.random.uniform(150,1850) # Target onset relative to start of trial
     onsetS1Ms=initIntervalMs
     initInterval=msToFrame(initIntervalMs)
-    apreTrialIntervalMs=500 # the time after trial has finished
-    apreTrialIntervalFrame=msToFrame(apreTrialIntervalMs)
+
     #midInterval =[-0.300 , -0.233, -0.167, -0.100 , -0.033, 0.033, 0.100 ,0.167, 0.233, 0.300]
-    #midInterval =[300 , 233, 167, 100 , 33, 33, 100 ,167, 233, 300]
-    #shuffle(midInterval)
+    midInterval =[300 , 233, 167, 100 , 33, 33, 100 ,167, 233, 300]
+    shuffle(midInterval)
 
-
+    #midInterval=msToFrame(midInterval[0])
     onsetS1FrameN=msToFrame(onsetS1Ms)#initInterval
-    onsetS2Ms=(onsetS1Ms+isiMs)
-    onsetS2Sec=onsetS2Ms/1000
-    onsetS2FrameN=msToFrame(onsetS2Ms)#onsetS1FrameN+midInterval
-    #lastInterval=msToFrame(2000)-(delay+33)
+    onsetS2FrameN=msToFrame(onsetS1Ms+midInterval[0])#onsetS1FrameN+midInterval
+    lastInterval=msToFrame(2000)-(onsetS2FrameN+33)
     totalTrialDurationFrame=msToFrame(2000)
+    apreTrialIntervalMs=300 # the time after trial has finished
+    apreTrialIntervalFrame=msToFrame(apreTrialIntervalMs)
     # #response
     x_coord = np.random.uniform(-1,1)
     y_coord = np.random.uniform(-1,1)
@@ -341,27 +298,24 @@ for thisTrials in trialss:
     y_coord_onCircle=(((y_coord_initPX/hypoPx_init)*sizeHandPix)/win.size[1])    
     responsePointer.setPos((x_coord_onCircle,y_coord_onCircle),log=False)
 
-
-    distractor.setFillColor(distractor_color)
-    distractor.setLineColor(distractor_color)
     # stim_color: color of stimuli in csv file trialList
-    target.setFillColor(stim_color)
-    target.setLineColor(stim_color)
-    cueForRep.setFillColor(stim_color)
-    cueForRep.setLineColor(stim_color)
+    target.setFillColor(targetColor)
+    target.setLineColor(targetColor)
+    cueForRep.setFillColor(targetColor)
+    cueForRep.setLineColor(targetColor)
     audCueEnd.setSound('audioCue2Init.wav', secs=0.033, hamming=False)
     audCueEnd.setVolume(1.0, log=False)
     audCueStart.setSound('audioCue2Init.wav', secs=0.033, hamming=False)
     audCueStart.setVolume(1.0, log=False)
-    space2pass.keys = []
-    space2pass.rt = []
-    _space2pass_allKeys = []
-    fixationPoint.setFillColor
+    sapce2pass_2.keys = []
+    sapce2pass_2.rt = []
+    _sapce2pass_2_allKeys = []
+
     # Run 'Begin Routine' code from fixOpacitiy
     fixation_opacity=1
     i=0
     # keep track of which components have finished
-    trialComponents = [audCueStart, outerDisk, distractor, target, placeholder, audCueEnd, space2pass, fixationPoint,responsePointer,cueForRep,mouse]
+    trialComponents = [audCueStart, outerDisk, target, placeholder, audCueEnd, sapce2pass_2, fixationPoint,responsePointer,cueForRep,mouse]
     for thisComponent in trialComponents:
         thisComponent.tStart = None
         thisComponent.tStop = None
@@ -381,14 +335,9 @@ for thisTrials in trialss:
     audCue1Started=False
     audCue2Started=False
     ### --- Save some variables to csv
-    thisExp.addData("target_color", stim_color)
+    thisExp.addData("target_color", targetColor)
     thisExp.addData("expected_target_onset",onsetS1Ms/1000)
     thisExp.addData("expected_target_onset_in_frames",onsetS1FrameN*frameDur)
-    thisExp.addData("expected_delay",isiMs/1000)
-    thisExp.addData("expected_delays_frame",isiFrame*frameDur)
-    thisExp.addData("expected_distractor",onsetS2Ms/1000)
-    thisExp.addData("expected_distractor_frame",onsetS2FrameN*frameDur)
-
 
     # --- Run Routine "trial" ---
     while continueRoutine:
@@ -409,7 +358,7 @@ for thisTrials in trialss:
             # add timestamp to datafile
             thisExp.addData('fixationPoint.started',t)
             fixationPoint.setAutoDraw(True)
-        if fixationPoint.status == STARTED and fixationEnded==False:
+        if fixationPoint.status == STARTED:
         #Code for changing fixation opacity
             #fixationPoint.setOpacity(fixation_opacity, log=False)
             #fColor=fColor-0.0085
@@ -440,7 +389,6 @@ for thisTrials in trialss:
             audCueStart.tStart = t  # local t and not account for scr refresh
             audCueStart.tStartRefresh = tThisFlipGlobal  # on global time
             # add timestamp to datafile
-            audCueStart.frameNStart = frameN  # exact frame index
             thisExp.addData('audCueStart.started', round(t,5))
             audCueStart.play()  # start the sound (it finishes automatically)
             audCue1Started=True
@@ -473,8 +421,9 @@ for thisTrials in trialss:
                 placeholder.status=STARTED
             elif frameN>= totalTrialDurationFrame:
                 placeholder.setAutoDraw(False)
-                #if cueForRep==NOT_STARTED:
                 fixationPoint.setAutoDraw(True)
+                fixationPoint.status=NOT_STARTED
+
                 placeholder.status=STARTED
             else:
                 placeholder.setAutoDraw(True)
@@ -488,15 +437,14 @@ for thisTrials in trialss:
             outerDisk.tStartRefresh = tThisFlipGlobal  # on global time
             win.timeOnFlip(outerDisk, 'tStartRefresh')  # time at next scr refresh
             outerDisk.setAutoDraw(True)
-        
-
+    
         # *target* updates
         if target.status == NOT_STARTED and frameN >= onsetS1FrameN and fixationEnded==True:
             # keep track of start time/frame for later
-            target.tStart = t  # local t and not account for scr refresh
             thisExp.addData('target.started',t)
             target.setAutoDraw(True)
             target.frameNStart = frameN  # exact frame index
+            target.tStart = t  # local t and not account for scr refresh
             target.tStartRefresh = tThisFlipGlobal  # on global time
             win.timeOnFlip(target, 'tStartRefresh')  # time at next scr refresh
             # add timestamp to datafile
@@ -510,32 +458,7 @@ for thisTrials in trialss:
                 thisExp.addData('target.stopped',t)
                 target.setAutoDraw(False)
 
-        # *distractor* updates
-        # if isiMs<0:
-        #     if distractor.status == NOT_STARTED and frameN >= onsetS2FrameN
 
-
-        #if distractor.status == NOT_STARTED and frameN >= (audCueStart.frameNStart+onsetS2FrameN) and fixationEnded==True:
-        if fixationEnded==True:
-            if distractor.status == NOT_STARTED and frameN >= onsetS2FrameN:
-
-                # keep track of start time/frame for later
-                distractor.tStart = t  # local t and not account for scr refresh
-                thisExp.addData('distractor.started',t)
-                distractor.setAutoDraw(True)
-                distractor.frameNStart = frameN  # exact frame index
-                distractor.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(distractor, 'tStartRefresh')  # time at next scr refresh
-                # add timestamp to datafile
-        if distractor.status == STARTED:
-            if frameN >= (distractor.frameNStart + durS2):
-                # keep track of stop time/frame for later
-                distractor.tStop = t  # not accounting for scr refresh
-                distractor.frameNStop = frameN  # exact frame index
-                # add timestamp to datafile
-                thisExp.addData( 'distractor.stopped',t)
-                distractor.setAutoDraw(False)
-        
 
         if audCueEnd.status == NOT_STARTED and t >= 2.0 and fixationEnded==True:
             # keep track of start time/frame for later
@@ -555,27 +478,26 @@ for thisTrials in trialss:
                 thisExp.addData('audCueEnd.stopped', round(t,5))
                 audCue2Started=False
         
-        # *space2pass* updates
-        if space2pass.status == NOT_STARTED and frameN >= totalTrialDurationFrame+apreTrialIntervalFrame+msToFrame(200):
+        # *sapce2pass_2* updates
+        if sapce2pass_2.status == NOT_STARTED and frameN >= totalTrialDurationFrame+apreTrialIntervalFrame:
             # keep track of start time/frame for later
-            space2pass.frameNStart = frameN  # exact frame index
-            space2pass.tStart = t  # local t and not account for scr refresh
-            space2pass.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(space2pass, 'tStartRefresh')  # time at next scr refresh
+            sapce2pass_2.frameNStart = frameN  # exact frame index
+            sapce2pass_2.tStart = t  # local t and not account for scr refresh
+            sapce2pass_2.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(sapce2pass_2, 'tStartRefresh')  # time at next scr refresh
             # add timestamp to datafile
-            thisExp.addData('space2pass.started', t)
-            space2pass.status = STARTED
+            thisExp.addData('sapce2pass_2.started', t)
+            sapce2pass_2.status = STARTED
             # keyboard checking is just starting
-            space2pass.clock.reset()  # now t=0
-            space2pass.clearEvents(eventType='keyboard')
-        if space2pass.status == STARTED:
-            #continueRoutine = False # a response ends the routine
-            theseKeys = space2pass.getKeys(keyList=['space'], waitRelease=False)
-            _space2pass_allKeys.extend(theseKeys)
-            if len(_space2pass_allKeys):
+            sapce2pass_2.clock.reset()  # now t=0
+            sapce2pass_2.clearEvents(eventType='keyboard')
+        if sapce2pass_2.status == STARTED:
+            theseKeys = sapce2pass_2.getKeys(keyList=['space'], waitRelease=False)
+            _sapce2pass_2_allKeys.extend(theseKeys)
+            if len(_sapce2pass_2_allKeys):
             #if True:
-                space2pass.keys = _space2pass_allKeys[-1].name  # just the last key pressed
-                space2pass.rt = _space2pass_allKeys[-1].rt
+                sapce2pass_2.keys = _sapce2pass_2_allKeys[-1].name  # just the last key pressed
+                sapce2pass_2.rt = _sapce2pass_2_allKeys[-1].rt
                 continueRoutine = False # a response ends the routine
                      
         
@@ -642,26 +564,23 @@ for thisTrials in trialss:
                         responsePointer.frameNstop=frameN
                         thisExp.addData("responsePointer.stopped",t)
                         thisExp.addData("rTAfterMotionTreshold",t-responsePointer.tStart)
+
                         perceivedTime=round(coord2time(x_coord_onCircle,y_coord_onCircle)/1000,5)
                         thisExp.addData("perceivedTime",perceivedTime)
-                        #thisExp.addData("pTemporalError",pTemporalError)
                         #responsePointer.setAutoDraw(False)
                         thisExp.addData('resp_x_coord', x_coord_onCircle)
                         thisExp.addData('resp_y_coord', y_coord_onCircle)
-                        continueRoutine=False
                     
         #### ------- Updates for PostCue ------
         if cueForRep.status == NOT_STARTED and frameN >= totalTrialDurationFrame+apreTrialIntervalFrame:
             fixationPoint.setAutoDraw(False )
             cueForRep.setAutoDraw(True)
-
             thisExp.addData('cueForRep.started', t)
-
 
         if cueForRep.status == STARTED:
             if continueRoutine == False:
                 cueForRep.setAutoDraw(False)
-        
+
 
         
         # check for quit (typically the Esc key)
@@ -681,7 +600,7 @@ for thisTrials in trialss:
         # refresh the screen
         if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
             win.flip()
-
+    
     # --- Ending Routine "trial" ---
     for thisComponent in trialComponents:
         if hasattr(thisComponent, "setAutoDraw"):
@@ -689,15 +608,12 @@ for thisTrials in trialss:
     audCueStart.stop()  # ensure sound has stopped at end of routine
     audCueEnd.stop()  # ensure sound has stopped at end of routine
     # check responses
-    if space2pass.keys in ['', [], None]:  # No response was made
-        space2pass.keys = None
-    trialss.addData('space2pass.keys',space2pass.keys)
-    if space2pass.keys != None:  # we had a response
-        trialss.addData('space2pass.rt', space2pass.rt)
+    if sapce2pass_2.keys in ['', [], None]:  # No response was made
+        sapce2pass_2.keys = None
+    trialss.addData('sapce2pass_2.keys',sapce2pass_2.keys)
+    if sapce2pass_2.keys != None:  # we had a response
+        trialss.addData('sapce2pass_2.rt', sapce2pass_2.rt)
     # the Routine "trial" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     thisExp.nextEntry()
-
-    
-# completed n repeats of 'trialss'
 

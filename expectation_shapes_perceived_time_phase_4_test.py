@@ -276,7 +276,7 @@ for thisTrials in trialss:
     ### Timing of objects
     preTrialIntervalMs=500
     preTrialIntervalFrame=msToFrame(preTrialIntervalMs)
-    initIntervalMs=np.random.uniform(150,1550) # Target onset relative to start of trial
+    initIntervalMs=np.random.uniform(150,1850) # Target onset relative to start of trial
     onsetS1Ms=initIntervalMs
     initInterval=msToFrame(initIntervalMs)
 
@@ -533,12 +533,13 @@ for thisTrials in trialss:
                 prevButtonState = buttons
                 released=mouse.getPressed()
                 if sum(released)==0:
-                    mouse_has_been_released = True
-                    x_coord=mouse.getPos()[0]
-                    y_coord=mouse.getPos()[1]
-                    gotValidClick = False
-                    buttons = mouse.getPressed()
-                    mouse.time.append(mouse.mouseClock.getTime())
+                    if monitorunittools.pix2deg(pixels=hypoPx,monitor=win.monitor )>(diskSize/2):
+                        mouse_has_been_released = True
+                        x_coord=mouse.getPos()[0]
+                        y_coord=mouse.getPos()[1]
+                        gotValidClick = False
+                        buttons = mouse.getPressed()
+                        mouse.time.append(mouse.mouseClock.getTime())
     
 
         # *responsePointer* updates
