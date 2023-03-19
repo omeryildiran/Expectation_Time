@@ -226,7 +226,7 @@ try:
     rep_trial=rep_trial
 except NameError:
     expBlock="trials_no_exp.csv"
-    rep_trial=2
+    rep_trial=1
 
 ## ---- Prepare to start routine Trial ---
 # set up handler to look after randomisation of conditions etc
@@ -301,7 +301,7 @@ for thisTrials in trialss:
     durS2=msToFrame(33)
     fColor=1
     ### Timing of objects
-    preTrialIntervalMs=500
+    preTrialIntervalMs=1000
     preTrialIntervalFrame=msToFrame(preTrialIntervalMs)
     #initIntervalMs=np.random.uniform(450,1250) # Target onset relative to start of trial
     #midInterval=msToFrame(midInterval[0])
@@ -315,7 +315,7 @@ for thisTrials in trialss:
 
     onsetS1Ms=initIntervalMs
     initInterval=msToFrame(initIntervalMs)
-    apreTrialIntervalMs=500 # the time after trial has finished
+    apreTrialIntervalMs=300 # the time after trial has finished
     apreTrialIntervalFrame=msToFrame(apreTrialIntervalMs)
     #midInterval =[-0.300 , -0.233, -0.167, -0.100 , -0.033, 0.033, 0.100 ,0.167, 0.233, 0.300]
     #midInterval =[300 , 233, 167, 100 , 33, 33, 100 ,167, 233, 300]
@@ -402,7 +402,7 @@ for thisTrials in trialss:
         # *fixationPoint* updates
         if fixationPoint.status == NOT_STARTED and frameN>=0:
             # keep track of start time/frame for later
-            #fixationPoint.frameNStart = frameN  # exact frame index
+            fixationPoint.frameNStart = frameN  # exact frame index
             fixationPoint.tStart = t  # local t and not account for scr refresh
             fixationPoint.tStartRefresh = tThisFlipGlobal  # on global time
             win.timeOnFlip(fixationPoint, 'tStartRefresh')  # time at next scr refresh
@@ -412,11 +412,12 @@ for thisTrials in trialss:
         if fixationPoint.status == STARTED and fixationEnded==False:
         #Code for changing fixation opacity
             #fixationPoint.setOpacity(fixation_opacity, log=False)
-            #fColor=fColor-0.0085
-            #fixationPoint.setFillColor([fColor,fColor,fColor], log=False)
-            #fixationPoint.setLineColor([fColor,fColor,fColor], log=False)
+            if frameN>fixationPoint.frameNStart+msToFrame(800):
+                fColor=fColor-(1/msToFrame(200))
+                fixationPoint.setFillColor([fColor,fColor,fColor], log=False)
+                fixationPoint.setLineColor([fColor,fColor,fColor], log=False)
             #if frameN >= (preTrialIntervalFrame):
-            if tThisFlip >= 0.5-frameTolerance:
+            if tThisFlip >= 1.0-frameTolerance:
                 # keep track of stop time/frame for later
                 fixationPoint.tStop = t  # not accounting for scr refresh
                 fixationPoint.frameNStop = frameN  # exact frame index
@@ -429,6 +430,9 @@ for thisTrials in trialss:
                 t=routineTimer.getTime()   
                 fixationPoint.setAutoDraw(False)
                 fixationEnded=True
+                fColor=1
+                fixationPoint.setFillColor([fColor,fColor,fColor], log=False)
+                fixationPoint.setLineColor([fColor,fColor,fColor], log=False)
         # fixOpacitiy to decrease
         # opacityDecrement=(1/(preTrialIntervalFrame/2))
         # if i>(round(preTrialIntervalFrame/2)):
@@ -474,7 +478,8 @@ for thisTrials in trialss:
             elif frameN>= totalTrialDurationFrame:
                 placeholder.setAutoDraw(False)
                 #if cueForRep==NOT_STARTED:
-                fixationPoint.setAutoDraw(True)
+                #fixationPoint.setAutoDraw(True)
+                #fixationPoint.status=NOT_STARTED
                 placeholder.status=STARTED
             else:
                 placeholder.setAutoDraw(True)
@@ -625,9 +630,9 @@ for thisTrials in trialss:
             win.timeOnFlip(responsePointer, 'tStartRefresh')  # time at next scr refresh
             # add timestamp to datafile
             thisExp.addData('responsePointer.started',round(t,5))
-            responsePointer.setAutoDraw(True)
         if responsePointer.status == STARTED:  # only update if drawing
             if monitorunittools.pix2deg(pixels=hypoPx,monitor=win.monitor )>(diskSize/2):
+                responsePointer.setAutoDraw(True)
                 if responseTimeNotStarted==True:
                     thisExp.addData("responseStarted",t)
                     thisExp.addData("rtAfterMotionTreshold",t-responsePointer.tStart)

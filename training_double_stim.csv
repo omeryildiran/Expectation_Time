@@ -1,0 +1,11 @@
+﻿id,delay,expectation,congruency,trial_num,stim_color,distractor_color,block
+1,-500,0.5,none,59,green,red,no_Expectation
+1,-500,0.5,none,77,green,red,no_Expectation
+1,-500,0.5,none,23,green,red,no_Expectation
+1,-500,0.5,none,68,red,green,no_Expectation
+1,-500,0.5,none,46,red,green,no_Expectation
+1,500,0.5,none,98,red,green,no_Expectation
+1,500,0.5,none,25,green,red,no_Expectation
+1,500,0.5,none,33,green,red,no_Expectation
+1,500,0.5,none,60,red,green,no_Expectation
+1,500,0.5,none,88,red,green,no_Expectation
