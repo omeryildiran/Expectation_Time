@@ -368,10 +368,10 @@ for thisTrials in trialss:
         if fixationPoint.status == STARTED:
         #Code for changing fixation opacity
             #fixationPoint.setOpacity(fixation_opacity, log=False)
-            if frameN>fixationPoint.frameNStart+msToFrame(800):
-                fColor=fColor-(1/msToFrame(200))
-                fixationPoint.setFillColor([fColor,fColor,fColor], log=False)
-                fixationPoint.setLineColor([fColor,fColor,fColor], log=False)
+            # if frameN>fixationPoint.frameNStart+msToFrame(800):
+            #     fColor=fColor-(1/msToFrame(200))
+            #     fixationPoint.setFillColor([fColor,fColor,fColor], log=False)
+            #     fixationPoint.setLineColor([fColor,fColor,fColor], log=False)
             #if frameN >= (preTrialIntervalFrame):
             if tThisFlip >= 1.0-frameTolerance:
                 # keep track of stop time/frame for later
@@ -387,8 +387,8 @@ for thisTrials in trialss:
                 fixationPoint.setAutoDraw(False)
                 fixationEnded=True
                 fColor=1
-                fixationPoint.setFillColor([fColor,fColor,fColor], log=False)
-                fixationPoint.setLineColor([fColor,fColor,fColor], log=False)
+                # fixationPoint.setFillColor([fColor,fColor,fColor], log=False)
+                # fixationPoint.setLineColor([fColor,fColor,fColor], log=False)
         # fixOpacitiy to decrease
         # opacityDecrement=(1/(preTrialIntervalFrame/2))
         # if i>(round(preTrialIntervalFrame/2)):

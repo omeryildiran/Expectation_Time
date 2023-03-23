@@ -239,7 +239,7 @@ for thisTrials in trialss:
     if thisTrials != None:
         for paramName in thisTrials:
             exec('{} = thisTrials[paramName]'.format(paramName))
-    thisExp.addData("isTrial","test")
+    thisExp.addData("isTrial","testSingleStim")
     # --- Prepare to start Routine "trial" ---
     continueRoutine = True
     routineForceEnded = False
@@ -351,7 +351,7 @@ for thisTrials in trialss:
         # *fixationPoint* updates
         if fixationPoint.status == NOT_STARTED and frameN>=0:
             # keep track of start time/frame for later
-            #fixationPoint.frameNStart = frameN  # exact frame index
+            fixationPoint.frameNStart = frameN  # exact frame index
             fixationPoint.tStart = t  # local t and not account for scr refresh
             fixationPoint.tStartRefresh = tThisFlipGlobal  # on global time
             win.timeOnFlip(fixationPoint, 'tStartRefresh')  # time at next scr refresh
@@ -361,10 +361,10 @@ for thisTrials in trialss:
         if fixationPoint.status == STARTED:
         #Code for changing fixation opacity
             #fixationPoint.setOpacity(fixation_opacity, log=False)
-            if frameN>fixationPoint.frameNStart+msToFrame(800):
-                fColor=fColor-(1/msToFrame(200))
-                fixationPoint.setFillColor([fColor,fColor,fColor], log=False)
-                fixationPoint.setLineColor([fColor,fColor,fColor], log=False)
+            # if frameN>fixationPoint.frameNStart+msToFrame(800):
+            #     fColor=fColor-(1/msToFrame(200))
+            #     fixationPoint.setFillColor([fColor,fColor,fColor], log=False)
+            #     fixationPoint.setLineColor([fColor,fColor,fColor], log=False)
             if tThisFlip >= 1.0-frameTolerance:
                 # keep track of stop time/frame for later
                 fixationPoint.tStop = t  # not accounting for scr refresh
@@ -379,8 +379,8 @@ for thisTrials in trialss:
                 fixationPoint.setAutoDraw(False)
                 fixationEnded=True
                 fColor=1
-                fixationPoint.setFillColor([fColor,fColor,fColor], log=False)
-                fixationPoint.setLineColor([fColor,fColor,fColor], log=False)
+                # fixationPoint.setFillColor([fColor,fColor,fColor], log=False)
+                # fixationPoint.setLineColor([fColor,fColor,fColor], log=False)
         # fixOpacitiy to decrease
         # opacityDecrement=(1/(preTrialIntervalFrame/2))
         # if i>(round(preTrialIntervalFrame/2)):
@@ -573,6 +573,8 @@ for thisTrials in trialss:
                         #responsePointer.setAutoDraw(False)
                         thisExp.addData('resp_x_coord', x_coord_onCircle)
                         thisExp.addData('resp_y_coord', y_coord_onCircle)
+                        continueRoutine=False
+
                     
         #### ------- Updates for PostCue ------
         if cueForRep.status == NOT_STARTED and frameN >= totalTrialDurationFrame+apreTrialIntervalFrame:

@@ -225,7 +225,7 @@ try:
     expBlock=expBlock
     rep_trial=rep_trial
 except NameError:
-    expBlock="trials_no_exp.csv"
+    expBlock="trial_list_0.5_0.csv"
     rep_trial=1
 
 ## ---- Prepare to start routine Trial ---
@@ -254,9 +254,9 @@ this_text="Now you can start the trials.\nPress 'Space' to go!"
 exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
 for thisTrials in trialss:
     ## Run familiarization if participant did more than 10 trial
-    if notForgetTime==25:
+    if notForgetTime==25 and expBlock!="training_double_stim.csv":
         blockNumber+=1
-        this_text="You have done "+str(blockNumber)+" out of"+str(rep_trial*4)+ " blocks. Now it is time to have a break for at least 10 second and familiarize again with the time interval.\nWhenever you are ready Press 'space' to start familiarization"
+        this_text="You have done "+str(blockNumber)+" out of "+str(20)+ " blocks. Now it is time to have a break for at least 10 second and familiarize again with the time interval.\nWhenever you are ready Press 'space' to start familiarization"
         exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
         rep_fam=5
         exec(open("expectation_shapes_perceived_time_phase_2_familiarization.py").read())
@@ -264,8 +264,12 @@ for thisTrials in trialss:
         exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
         notForgetTime=0
     notForgetTime+=1
-
-    thisExp.addData("isTrial","trial")
+    
+    if expBlock=="training_double_stim.csv":
+        thisExp.addData("isTrial","train_doubleStim")
+    else:
+        thisExp.addData("isTrial","trial")
+    
     win.setMouseVisible(False)
     currentLoop = trialss
     # abbreviate parameter names if possible (e.g. rgb = thisTrials.rgb)
@@ -308,11 +312,13 @@ for thisTrials in trialss:
     isiMs=delay
     isiFrame=msToFrame(delay)
     isiFrameCorrected=isiFrame*(isiMs/isiMs)
-    if isiMs>0:
-        initIntervalMs=np.random.uniform(150,(1850-isiMs)) # Target onset relative to start of trial
-    elif isiMs<0:
-        initIntervalMs=np.random.uniform((150-isiMs),1850) # Target onset relative to start of trial
-
+    if expBlock!="training_double_stim.csv":
+            initIntervalMs=targetTimeMs
+    elif expBlock=="training_double_stim.csv":
+        if isiMs>0:
+            initIntervalMs=np.random.uniform(150,(1850-isiMs)) # Target onset relative to start of trial
+        elif isiMs<0:
+            initIntervalMs=np.random.uniform((150-isiMs),1850) # Target onset relative to start of trial
     onsetS1Ms=initIntervalMs
     initInterval=msToFrame(initIntervalMs)
     apreTrialIntervalMs=300 # the time after trial has finished
@@ -388,7 +394,7 @@ for thisTrials in trialss:
     thisExp.addData("expected_delays_frame",isiFrame*frameDur)
     thisExp.addData("expected_distractor",onsetS2Ms/1000)
     thisExp.addData("expected_distractor_frame",onsetS2FrameN*frameDur)
-
+    thisExp.addData("expBlockFiles",expBlock)
 
     # --- Run Routine "trial" ---
     while continueRoutine:
@@ -412,10 +418,10 @@ for thisTrials in trialss:
         if fixationPoint.status == STARTED and fixationEnded==False:
         #Code for changing fixation opacity
             #fixationPoint.setOpacity(fixation_opacity, log=False)
-            if frameN>fixationPoint.frameNStart+msToFrame(800):
-                fColor=fColor-(1/msToFrame(200))
-                fixationPoint.setFillColor([fColor,fColor,fColor], log=False)
-                fixationPoint.setLineColor([fColor,fColor,fColor], log=False)
+            # if frameN>fixationPoint.frameNStart+msToFrame(800):
+            #     fColor=fColor-(1/msToFrame(200))
+            #     fixationPoint.setFillColor([fColor,fColor,fColor], log=False)
+            #     fixationPoint.setLineColor([fColor,fColor,fColor], log=False)
             #if frameN >= (preTrialIntervalFrame):
             if tThisFlip >= 1.0-frameTolerance:
                 # keep track of stop time/frame for later
@@ -430,9 +436,9 @@ for thisTrials in trialss:
                 t=routineTimer.getTime()   
                 fixationPoint.setAutoDraw(False)
                 fixationEnded=True
-                fColor=1
-                fixationPoint.setFillColor([fColor,fColor,fColor], log=False)
-                fixationPoint.setLineColor([fColor,fColor,fColor], log=False)
+                #fColor=1
+                # fixationPoint.setFillColor([fColor,fColor,fColor], log=False)
+                # fixationPoint.setLineColor([fColor,fColor,fColor], log=False)
         # fixOpacitiy to decrease
         # opacityDecrement=(1/(preTrialIntervalFrame/2))
         # if i>(round(preTrialIntervalFrame/2)):
@@ -630,6 +636,7 @@ for thisTrials in trialss:
             win.timeOnFlip(responsePointer, 'tStartRefresh')  # time at next scr refresh
             # add timestamp to datafile
             thisExp.addData('responsePointer.started',round(t,5))
+            responsePointer.status=STARTED
         if responsePointer.status == STARTED:  # only update if drawing
             if monitorunittools.pix2deg(pixels=hypoPx,monitor=win.monitor )>(diskSize/2):
                 responsePointer.setAutoDraw(True)
