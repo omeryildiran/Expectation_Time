@@ -71,12 +71,18 @@ frameTolerance = 0.001  # how close to onset before 'same' frame
 
 # --- Setup the Window ---
 win = visual.Window(
-    size=[800,800], fullscr=True, screen=0, 
+    size=[800,600], fullscr=True, screen=0, 
     winType='pyglet', allowStencil=False,
     monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
     blendMode='avg', useFBO=True, 
     units='height')
+
 win.mouseVisible = False
+### Set the monitor to the correct distance and size
+# win.monitor.setSizePix((800,600))
+# win.mouseVisible = False
+# win.monitor.setWidth(25.6)
+# win.monitor.setDistance(50)
 # store frame rate of monitor if we can measure it
 expInfo['frameRate'] = win.getActualFrameRate()
 if expInfo['frameRate'] != None:

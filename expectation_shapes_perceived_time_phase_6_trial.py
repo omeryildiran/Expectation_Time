@@ -74,12 +74,13 @@ except NameError:
 
     # --- Setup the Window ---
     win = visual.Window(
-        size=[800,800], fullscr=True, screen=0, 
+        size=[1920,1080], fullscr=True, screen=0, 
         winType='pyglet', allowStencil=False,
         monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
         blendMode='avg', useFBO=True, 
         units='height')
-    win.mouseVisible = False
+
+
     # store frame rate of monitor if we can measure it
     expInfo['frameRate'] = win.getActualFrameRate()
     if expInfo['frameRate'] != None:
@@ -100,7 +101,7 @@ except NameError:
 
     # create a default keyboard (e.g. to check for escape)
     defaultKeyboard = keyboard.Keyboard(backend='iohub')
-    # # ----- Variables and Parameters ----- 
+    # # ----- Variables   and Parameters ----- 
     fColor=1
     sizeHand=5#2.5
     sizeHandPix=monitorunittools.deg2pix(degrees=sizeHand,monitor=win.monitor)
@@ -258,7 +259,7 @@ for thisTrials in trialss:
         blockNumber+=1
         this_text="You have done "+str(blockNumber)+" out of "+str(20)+ " blocks. Now it is time to have a break for at least 10 second and familiarize again with the time interval.\nWhenever you are ready Press 'space' to start familiarization"
         exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
-        rep_fam=5
+        rep_fam=4
         exec(open("expectation_shapes_perceived_time_phase_2_familiarization.py").read())
         this_text="Now you can continue the trials.\nPress 'Space' to go!"
         exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())

@@ -3,9 +3,9 @@ standAlone=True # If you run this code to run whole experiment you need to alway
 ## creating mapping of experimental blocks
 blockDict={'base':"trial_list_0.5_0.csv",
            'mod':"trials_mod_exp",
-           "high":"trial_list_0.7_0.csv",
+           "high":"trial_list_0.85_0.csv",
           'mod2':"trials_mod_exp_2",
-          "high2":"trial_list_0.7_1.csv"}#
+          "high2":"trial_list_0.85_1.csv"}#
 
 
 # 0 - initiate exp
@@ -31,7 +31,7 @@ exec(open("expectation_shapes_perceived_time_phase_4_test_singleStim.py").read()
 # 4.2- Double_stim_training
 this_text="Now you will do the same task, only this time there you will see two"\
 " consequent different colored stimuli."\
-" But you will be asked for reporting color of one of them at the end of trial."
+" But you will be asked for reporting time of one of them at the end of trial."
 exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
 expBlock="training_double_stim.csv"
 rep_trial=4
@@ -40,7 +40,7 @@ exec(open("expectation_shapes_perceived_time_phase_6_trial.py").read())
 # 5 - Trial instructions
 exec(open("expectation_shapes_perceived_time_phase_5_trialInstructions.py").read())
 # 6 - Trial Phase
-block_type="base"
+block_type="high2"
 expBlock=blockDict[block_type]
 rep_trial=1
 # if block_type in ["mod" ,"mod2"]:     rep_trial=5
