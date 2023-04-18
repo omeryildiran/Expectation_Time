@@ -12,8 +12,8 @@ except NameError:
     import psychopy
     from psychopy import locale_setup
     from psychopy import prefs
-    prefs.hardware['audioLib'] = 'PTB'
-    prefs.hardware['audioLatencyMode'] = '4'
+    #prefs.hardware['audioLib'] = 'PTB'
+    #prefs.hardware['audioLatencyMode'] = '4'
     #from pysoundcard import Stream
     #from scipy.io.wavfile import read as wavread
 
@@ -79,7 +79,12 @@ except NameError:
         monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
         blendMode='avg', useFBO=True, 
         units='height')
-
+    # win.mouseVisible = False
+    # ## Set the monitor to the correct distance and size
+    # win.monitor.setSizePix((1929,1080))
+    # win.mouseVisible = False
+    # win.monitor.setWidth(15)
+    # win.monitor.setDistance(57)
 
     # store frame rate of monitor if we can measure it
     expInfo['frameRate'] = win.getActualFrameRate()
@@ -143,6 +148,16 @@ except NameError:
 
 ### End initiator run
 
+try:
+    expBlock=expBlock
+    rep_trial=rep_trial
+    soundVolume=soundVolume
+
+except NameError:
+    expBlock="trial_list_0.5_0.csv"
+    rep_trial=1
+    soundVolume=0.65
+
 ## --- Start Trial Routine --- 
 # # --- Initialize components for Routine "trial" ---
 # Run 'Begin Experiment' code from pickTargetCol
@@ -164,49 +179,50 @@ responsePointer = visual.ShapeStim(
     lineWidth=1.0,     colorSpace='rgb',  lineColor='white', fillColor='white',
     opacity=None, depth=-4.0, interpolate=True)
 
+
 # Create some handy timers
 # Run 'Begin Experiment' code from timingVars
 
 diskRadius=1
 durS1=msToFrame(33)
 durS2=msToFrame(33)
-audCueStart = sound.Sound('A', secs=0.033, stereo=True, hamming=False,
+audCueStart = sound.Sound('audioCue2Init.wav', secs=0.033, stereo=True, hamming=False,
     name='audioCueStart')
-audCueStart.setVolume(1.0)
+audCueStart.setVolume(soundVolume)
 outerDisk = visual.ShapeStim(
     win=win, name='outerDisk',units='deg', 
     size=(sizeHand*2, sizeHand*2), vertices='circle',
     ori=0.0, pos=(0, 0), anchor='center',
-    lineWidth=3.5,     colorSpace='rgb',  lineColor='white', fillColor=None,
+    lineWidth=6,     colorSpace='rgb',  lineColor='white', fillColor=None,
     opacity=None, depth=-3.0, interpolate=False)
 distractor = visual.ShapeStim(
     win=win, name='distractor',units='deg', 
     size=(diskSize,diskSize), vertices='circle',
     ori=0.0, pos=(0, 0), anchor='center',
-    lineWidth=2.0,     colorSpace='rgb',  lineColor='white', fillColor='white',
+    lineWidth=3.0,     colorSpace='rgb',  lineColor='white', fillColor='white',
     opacity=None, depth=-5.0, interpolate=False)
 target = visual.ShapeStim(
     win=win, name='target',units='deg', 
     size=(diskSize,diskSize), vertices='circle',
     ori=0.0, pos=(0, 0), anchor='center',
-    lineWidth=2.0,     colorSpace='rgb',  lineColor='white', fillColor='white',
+    lineWidth=3.0,     colorSpace='rgb',  lineColor='white', fillColor='white',
     opacity=None, depth=-5.0, interpolate=False)
 cueForRep = visual.ShapeStim(
     win=win, name='cueForRep',units='deg', 
     size=(diskSize,diskSize), vertices='circle',
     ori=0.0, pos=(0, 0), anchor='center',
-    lineWidth=2.0,     colorSpace='rgb',  lineColor='white', fillColor='white',
+    lineWidth=3.0,     colorSpace='rgb',  lineColor='white', fillColor='white',
     opacity=None, depth=-5.0, interpolate=False)
 
 placeholder = visual.ShapeStim(
     win=win, name='placeholder',units='deg', 
     size=(diskSize+0.1,diskSize+0.1), vertices='circle',
     ori=0.0, pos=(0, 0), anchor='center',
-    lineWidth=3.0,     colorSpace='rgb',  lineColor=[1,1,1], fillColor=None,
+    lineWidth=4,     colorSpace='rgb',  lineColor=[1,1,1], fillColor=None,
     opacity=None, depth=-4.0, interpolate=False)
-audCueEnd = sound.Sound('A', secs=0.033, stereo=True, hamming=False,
+audCueEnd = sound.Sound('audioCue2Init.wav', secs=0.033, stereo=True, hamming=False,
     name='audCueEnd')
-audCueEnd.setVolume(1.0)
+audCueEnd.setVolume(soundVolume)
 space2pass = keyboard.Keyboard()
 fixationPoint = visual.ShapeStim(
     win=win, name='fixationPoint', vertices='circle', 
@@ -222,12 +238,7 @@ def condition_selecter(condition="trials_no_exp.csv"):
     return condition
 condition_list=condition_selecter
 
-try:
-    expBlock=expBlock
-    rep_trial=rep_trial
-except NameError:
-    expBlock="trial_list_0.5_0.csv"
-    rep_trial=1
+
 
 ## ---- Prepare to start routine Trial ---
 # set up handler to look after randomisation of conditions etc
@@ -302,8 +313,8 @@ for thisTrials in trialss:
     targetColor=stimColors[0]
     distractorColor=stimColors[1]    
     # Run 'Begin Routine' code from timingVars
-    durS1=msToFrame(33)
-    durS2=msToFrame(33)
+    durS1=msToFrame(33.333)
+    durS2=msToFrame(33.333)
     fColor=1
     ### Timing of objects
     preTrialIntervalMs=1000
@@ -330,14 +341,17 @@ for thisTrials in trialss:
 
 
     onsetS1FrameN=msToFrame(onsetS1Ms)#initInterval
-    onsetS2Ms=(onsetS1Ms+isiMs)
+    if delay>0:
+        onsetS2Ms=(onsetS1Ms+isiMs+33.33)
+    elif delay<0:
+        onsetS2Ms=(onsetS1Ms+isiMs-33.33)
     onsetS2Sec=onsetS2Ms/1000
     onsetS2FrameN=msToFrame(onsetS2Ms)#onsetS1FrameN+midInterval
     #lastInterval=msToFrame(2000)-(delay+33)
     totalTrialDurationFrame=msToFrame(2000)
     # #response
-    x_coord = np.random.uniform(-1,1)
-    y_coord = np.random.uniform(-1,1)
+    x_coord = 0#np.random.uniform(-1,1)           
+    y_coord = 0#np.random.uniform(-1,1)
     # random     #initial Position pointer location
     x_coord_init = np.random.uniform(-1,1)
     y_coord_init = np.random.uniform(-1,1)
@@ -348,7 +362,7 @@ for thisTrials in trialss:
     y_coord_onCircle=(((y_coord_initPX/hypoPx_init)*sizeHandPix)/win.size[1])    
     responsePointer.setPos((x_coord_onCircle,y_coord_onCircle),log=False)
 
-
+    outerDisk.setLineColor("white")
     distractor.setFillColor(distractor_color)
     distractor.setLineColor(distractor_color)
     # stim_color: color of stimuli in csv file trialList
@@ -357,9 +371,9 @@ for thisTrials in trialss:
     cueForRep.setFillColor(stim_color)
     cueForRep.setLineColor(stim_color)
     audCueEnd.setSound('audioCue2Init.wav', secs=0.033, hamming=False)
-    audCueEnd.setVolume(1.0, log=False)
+    audCueEnd.setVolume(soundVolume, log=False)
     audCueStart.setSound('audioCue2Init.wav', secs=0.033, hamming=False)
-    audCueStart.setVolume(1.0, log=False)
+    audCueStart.setVolume(soundVolume, log=False)
     space2pass.keys = []
     space2pass.rt = []
     _space2pass_allKeys = []
@@ -455,8 +469,8 @@ for thisTrials in trialss:
             thisExp.addData('audCueStart.started', round(t,5))
             audCueStart.play()  # start the sound (it finishes automatically)
             audCue1Started=True
-        #if audCueStart.status == STARTED:
-        if audCue1Started== True:
+        if audCueStart.status == STARTED:
+        #if audCue1Started== True:
             # is it time to stop? (based on global clock, using actual start)
             if tThisFlipGlobal > audCueStart.tStartRefresh + 0.033-frameTolerance:
                 # add timestamp to datafile
@@ -479,14 +493,14 @@ for thisTrials in trialss:
         #        placeholder.setAutoDraw(False)
 
         if placeholder.status == STARTED: 
-            if cueForRep.autoDraw==True or target.autoDraw == True:
+            if cueForRep.autoDraw==True or target.autoDraw == True or distractor.autoDraw == True:
                 placeholder.setAutoDraw(False)
                 placeholder.status=STARTED
             elif frameN>= totalTrialDurationFrame:
                 placeholder.setAutoDraw(False)
                 #if cueForRep==NOT_STARTED:
-                #fixationPoint.setAutoDraw(True)
-                #fixationPoint.status=NOT_STARTED
+                fixationPoint.setAutoDraw(True)
+                fixationPoint.status=NOT_STARTED
                 placeholder.status=STARTED
             else:
                 placeholder.setAutoDraw(True)
@@ -511,6 +525,7 @@ for thisTrials in trialss:
             target.frameNStart = frameN  # exact frame index
             target.tStartRefresh = tThisFlipGlobal  # on global time
             win.timeOnFlip(target, 'tStartRefresh')  # time at next scr refresh
+            #outerDisk.setLineColor(stim_color)
             # add timestamp to datafile
 
         if target.status == STARTED:
@@ -521,6 +536,8 @@ for thisTrials in trialss:
                 # add timestamp to datafile     
                 thisExp.addData('target.stopped',t)
                 target.setAutoDraw(False)
+                #outerDisk.setLineColor('white')
+
 
         # *distractor* updates
         # if isiMs<0:
@@ -538,6 +555,8 @@ for thisTrials in trialss:
                 distractor.frameNStart = frameN  # exact frame index
                 distractor.tStartRefresh = tThisFlipGlobal  # on global time
                 win.timeOnFlip(distractor, 'tStartRefresh')  # time at next scr refresh
+                #outerDisk.setLineColor(distractor_color)
+
                 # add timestamp to datafile
         if distractor.status == STARTED:
             if frameN >= (distractor.frameNStart + durS2):
@@ -547,6 +566,8 @@ for thisTrials in trialss:
                 # add timestamp to datafile
                 thisExp.addData( 'distractor.stopped',t)
                 distractor.setAutoDraw(False)
+                #outerDisk.setLineColor("white")
+
         
 
         if audCueEnd.status == NOT_STARTED and t >= 2.0 and fixationEnded==True:
@@ -558,8 +579,8 @@ for thisTrials in trialss:
             thisExp.addData('audCueEnd.started', t)       
             audCueEnd.play()  # start the sound (it finishes automatically)
             audCue2Started=True
-        #if audCueEnd.status == STARTED:
-        if audCue2Started== True:
+        if audCueEnd.status == STARTED:
+        #if audCue2Started== True:
             # is it time to stop? (based on global clock, using actual start)
             if tThisFlipGlobal > audCueEnd.tStartRefresh + 0.033-frameTolerance:
                 # add timestamp to datafile
@@ -643,7 +664,7 @@ for thisTrials in trialss:
                 responsePointer.setAutoDraw(True)
                 if responseTimeNotStarted==True:
                     thisExp.addData("responseStarted",t)
-                    thisExp.addData("rtAfterMotionTreshold",t-responsePointer.tStart)
+                    thisExp.addData("rtUntillMotionTreshold",t-responsePointer.tStart)
                     responseTimeNotStarted=False
                 if mouse.x[0]!=x or mouse.y[0]!=y:
                     x_coord_onCircle=(((respX_px/hypoPx)*sizeHandPix)/win.size[1])
@@ -653,6 +674,7 @@ for thisTrials in trialss:
                     if mouse_has_been_released == True:
                         responsePointer.tStop= t  # local t and not account for scr refresh
                         responsePointer.frameNstop=frameN
+                        
                         thisExp.addData("responsePointer.stopped",t)
                         thisExp.addData("rTAfterMotionTreshold",t-responsePointer.tStart)
                         perceivedTime=round(coord2time(x_coord_onCircle,y_coord_onCircle)/1000,5)
@@ -670,8 +692,8 @@ for thisTrials in trialss:
 
             thisExp.addData('cueForRep.started', t)
 
-
         if cueForRep.status == STARTED:
+            #outerDisk.setLineColor(stim_color)
             if continueRoutine == False:
                 cueForRep.setAutoDraw(False)
         

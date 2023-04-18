@@ -1,13 +1,30 @@
+""" Coded by Omer Yildiran in January 2023.
 
+    For the research of "Expectation and Perceived Time Among Other Events" Omer Yildiran, Pascal Mamassian, 2023
+
+    In the Lab of Dr. Pascal Mamassian at the Ecole Normale Superieure in Paris (ENS-PSL), Laboratoire de Systeme Perceptifs (LSP)
+    This code is the main code for the experiment. It is organized in phases and blocks.
+    The experiment is divided into 3 phases: Familiarization, Test and Trial.
+    The familiarization phase is divided into 2 blocks: Single_stim and Double_stim.
+    The test phase is divided into 2 blocks: Single_stim and Double_stim.
+    qThe trial phase is divided into 4 blocks: base, mod, high and high2.
+    The base block is the baseline condition, in which the participant is asked to report the time of the one of the stimulus, and the probability of each stimulus to be asked is equal.
+    The high block is the high condition, in which the participant is asked to report the time of the one of the stimulus, but the probability 
+    of reporting (the stimulus in question at the end) the time of the cetain stimulus is higher.
+    This code and all the custom functions are written in Python and PsychoPy, with also the help of PsychoPy Builder.
+    The code is subject to change and update and under creative commons license.
+    You can use modify and share this code as long as you give credit to the original author.
+
+"""
 standAlone=True # If you run this code to run whole experiment you need to always state that standAlone is True
 ## creating mapping of experimental blocks
 blockDict={'base':"trial_list_0.5_0.csv",
            'mod':"trials_mod_exp",
            "high":"trial_list_0.85_0.csv",
           'mod2':"trials_mod_exp_2",
-          "high2":"trial_list_0.85_1.csv"}#
+          "high2":"trial_list_0.8_red.csv"}#
 
-
+soundVolume=0.65
 # 0 - initiate exp
 exec(open("expectation_shapes_perceived_time_0_initiateExp.py").read())
 # 1 - Welcome Screen

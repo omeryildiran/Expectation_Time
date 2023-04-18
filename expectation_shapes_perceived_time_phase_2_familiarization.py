@@ -102,10 +102,10 @@ except NameError:
     defaultKeyboard = keyboard.Keyboard(backend='iohub')
     # # ----- Variables and Parameters ----- 
     fColor=1
-    sizeHand=5#2.5
+    sizeHand=6#2.5
     sizeHandPix=monitorunittools.deg2pix(degrees=sizeHand,monitor=win.monitor)
     sizeClockCentre=0.5# =fixation point
-    sizePlaceholder=2#1
+    sizePlaceholder=3#1
     diskSize=sizePlaceholder
     pointer_size=monitorunittools.deg2pix(degrees=sizeClockCentre,monitor=win.monitor)/win.size[1]
     # Run 'Begin Experiment' code from secToFrame
@@ -143,26 +143,30 @@ except NameError:
 
 ### End initiator run
 ### Start Exp
+try:
+    soundVolume=soundVolume
+except NameError:
+    soundVolume=0.75
 
 ### ----- initiate Components --- 
 clockOutDisk = visual.ShapeStim(
     win=win, name='clockOutDisk',units='deg', 
     size=(sizeHand*2, sizeHand*2), vertices='circle',
     ori=0.0, pos=(0, 0), anchor='center',
-    lineWidth=4.0,     colorSpace='rgb',  lineColor='white', fillColor=None,
+    lineWidth=6.0,     colorSpace='rgb',  lineColor='white', fillColor=None,
     opacity=None, depth=-3.0, interpolate=True)
 clockHand = visual.ShapeStim(
     win=win, name='clockHand', vertices=[[0,0],[1,1]],units='deg', 
-    size=(sizeHand, 0.0001),
+    size=(sizeHand-0.2, 0.0001),
     ori=1.0, pos=(0, 0), anchor='bottom-center',
     lineWidth=4.0,     colorSpace='rgb',  lineColor='white', fillColor='white',
     opacity=None, depth=-4.0, interpolate=False)
 audioCue2Start = sound.Sound('A', secs=-1, stereo=True, hamming=False,
     name='audioCue2Start')
-audioCue2Start.setVolume(1.0)
+audioCue2Start.setVolume(soundVolume)
 audioCue2End = sound.Sound('A', secs=-1, stereo=True, hamming=False,
     name='audioCue2End')
-audioCue2End.setVolume(1.0)
+audioCue2End.setVolume(soundVolume)
 centreClock = visual.ShapeStim(
     win=win, name='centreClock',units='deg', 
     size=(sizeClockCentre,sizeClockCentre), vertices='circle',
@@ -174,7 +178,7 @@ centreClock = visual.ShapeStim(
 continueFam = visual.TextStim(win=win, name='continueFam',
     text="Press 'Space' to continue familiarizing with timig-interval",
     font='Open Sans',
-    pos=(0, -0.3), height=0.03, wrapWidth=None, ori=0.0, 
+    pos=(0, -0.32), height=0.03, wrapWidth=None, ori=0.0, 
     color='white', colorSpace='rgb', opacity=None, 
     languageStyle='LTR',
     depth=0.0);
@@ -242,9 +246,9 @@ for thisFamLoop in famLoop:
     _sapce2pass_allKeys = []
 
     audioCue2Start.setSound('audioCue2Init.wav',secs=0.033, hamming=False)
-    audioCue2Start.setVolume(1.0, log=False)
+    audioCue2Start.setVolume(soundVolume, log=False)
     audioCue2End.setSound('audioCue2Init.wav', secs=0.033,hamming=False)
-    audioCue2End.setVolume(1.0, log=False)
+    audioCue2End.setVolume(soundVolume, log=False)
     # keep track of which components have finished
     famComponents = [clockOutDisk, clockHand, audioCue2Start, audioCue2End, centreClock,sapce2pass,continueFam]
     for thisComponent in famComponents:

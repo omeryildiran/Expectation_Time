@@ -12,8 +12,8 @@ except NameError:
     import psychopy
     from psychopy import locale_setup
     from psychopy import prefs
-    prefs.hardware['audioLib'] = 'PTB'
-    prefs.hardware['audioLatencyMode'] = '4'
+    #prefs.hardware['audioLib'] = 'PTB'
+    #prefs.hardware['audioLatencyMode'] = '4'
     #from pysoundcard import Stream
     #from scipy.io.wavfile import read as wavread
 
@@ -94,7 +94,7 @@ except NameError:
 
     ioSession = '1'
     if 'session' in expInfo:
-        ioSession = str(expInfo['session'])
+        ioSession = str(expInfo['session'])   
     ioServer = io.launchHubServer(window=win, **ioConfig)
     eyetracker = None
 
@@ -143,11 +143,18 @@ except NameError:
 ### End initiator run
 from time2coord import time2coord
 
+try:
+    soundVolume=soundVolume
+    rep_test=rep_test
+
+except NameError:
+    soundVolume=0.65
+    rep_test=10
 
 ## --- Start Trial Routine --- 
 # # --- Initialize components for Routine "trial" ---
 # Run 'Begin Experiment' code from pickTargetCol
-stimColors=['red','green']
+stimColors=['green','red']
 mouse = event.Mouse(win=win,visible=False)
 x, y = [None, None]
 mouse.mouseClock = core.Clock()
@@ -178,14 +185,14 @@ feedbackPointer = visual.ShapeStim(
 diskRadius=1
 durS1=msToFrame(33)
 durS2=msToFrame(33)
-audCueStart = sound.Sound('A', secs=0.033, stereo=True, hamming=False,
+audCueStart = sound.Sound('audioCue2Init.wav', secs=0.033, stereo=True, hamming=False,
     name='audioCueStart')
-audCueStart.setVolume(1.0)
+audCueStart.setVolume(soundVolume)
 outerDisk = visual.ShapeStim(
     win=win, name='outerDisk',units='deg', 
     size=(sizeHand*2, sizeHand*2), vertices='circle',
     ori=0.0, pos=(0, 0), anchor='center',
-    lineWidth=3.5,     colorSpace='rgb',  lineColor='white', fillColor=None,
+    lineWidth=6,     colorSpace='rgb',  lineColor='white', fillColor=None,
     opacity=None, depth=-3.0, interpolate=False)
 
 target = visual.ShapeStim(
@@ -205,11 +212,11 @@ placeholder = visual.ShapeStim(
     win=win, name='placeholder',units='deg', 
     size=(diskSize+0.1,diskSize+0.1), vertices='circle',
     ori=0.0, pos=(0, 0), anchor='center',
-    lineWidth=3.0,     colorSpace='rgb',  lineColor=[1,1,1], fillColor=None,
+    lineWidth=4.0,     colorSpace='rgb',  lineColor=[1,1,1], fillColor=None,
     opacity=None, depth=-4.0, interpolate=False)
-audCueEnd = sound.Sound('A', secs=0.033, stereo=True, hamming=False,
+audCueEnd = sound.Sound('audioCue2Init.wav', secs=0.033, stereo=True, hamming=False,
     name='audCueEnd')
-audCueEnd.setVolume(1.0)
+audCueEnd.setVolume(soundVolume)
 sapce2pass_2 = keyboard.Keyboard()
 fixationPoint = visual.ShapeStim(
     win=win, name='fixationPoint', vertices='circle', 
@@ -219,14 +226,13 @@ fixationPoint = visual.ShapeStim(
     opacity=1.0, depth=-9.0, interpolate=True)
 fixation_opacity=1
 
+# Time of stimuli presentation
+stimuliOnsetTimes=np.random.uniform(150,1850,rep_test)
 ### --- Components added
 
 ## ---- Prepare to start routine Trial ---
 # set up handler to look after randomisation of conditions etc
-try:
-    rep_test=rep_test
-except NameError:
-    rep_test=10
+
 trialss = data.TrialHandler(nReps=rep_test, method='random', 
     extraInfo=expInfo, originPath=-1,
     trialList=[None],
@@ -238,7 +244,9 @@ if thisTrials != None:
     for paramName in thisTrials:
         exec('{} = thisTrials[paramName]'.format(paramName))
 
+test_trialN=-1 #trial number
 for thisTrials in trialss:
+    test_trialN+=1#trial number increment
     win.setMouseVisible(False)
     currentLoop = trialss
     # abbreviate parameter names if possible (e.g. rgb = thisTrials.rgb)
@@ -276,7 +284,7 @@ for thisTrials in trialss:
     ### Timing of objects
     preTrialIntervalMs=1000
     preTrialIntervalFrame=msToFrame(preTrialIntervalMs)
-    initIntervalMs=np.random.uniform(150,1850) # Target onset relative to start of trial
+    initIntervalMs=stimuliOnsetTimes[test_trialN] #np.random.uniform(150,1850) # Target onset relative to start of trial
     onsetS1Ms=initIntervalMs
     initInterval=msToFrame(initIntervalMs)
 
@@ -310,9 +318,9 @@ for thisTrials in trialss:
     cueForRep.setFillColor(targetColor)
     cueForRep.setLineColor(targetColor)
     audCueEnd.setSound('audioCue2Init.wav', secs=0.033, hamming=False)
-    audCueEnd.setVolume(1.0, log=False)
+    audCueEnd.setVolume(soundVolume, log=False)
     audCueStart.setSound('audioCue2Init.wav', secs=0.033, hamming=False)
-    audCueStart.setVolume(1.0, log=False)
+    audCueStart.setVolume(soundVolume, log=False)
     sapce2pass_2.keys = []
     sapce2pass_2.rt = []
     _sapce2pass_2_allKeys = []
@@ -432,8 +440,8 @@ for thisTrials in trialss:
                 placeholder.status=STARTED
             elif frameN>= totalTrialDurationFrame:
                 placeholder.setAutoDraw(False)
-                #fixationPoint.setAutoDraw(True)
-                #fixationPoint.status=NOT_STARTED
+                fixationPoint.setAutoDraw(True)
+                fixationPoint.status=NOT_STARTED
                 placeholder.status=STARTED
             else:
                 placeholder.setAutoDraw(True)
