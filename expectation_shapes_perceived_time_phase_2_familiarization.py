@@ -392,6 +392,9 @@ for thisFamLoop in famLoop:
             waitOnFlip = True
             win.callOnFlip(sapce2pass.clock.reset)  # t=0 on next screen flip
             win.callOnFlip(sapce2pass.clearEvents, eventType='keyboard')  # clear events on next screen flip
+            try: 
+                if testing:      continueRoutine=False
+            except NameError:     pass
         if sapce2pass.status == STARTED and not waitOnFlip:
             theseKeys = sapce2pass.getKeys(keyList=['space'], waitRelease=False)
             _sapce2pass_allKeys.extend(theseKeys)

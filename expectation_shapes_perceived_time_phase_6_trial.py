@@ -234,6 +234,7 @@ fixation_opacity=1
 
 ### --- Components added
 
+#testing=False
 def condition_selecter(condition="trials_no_exp.csv"):
     return condition
 condition_list=condition_selecter
@@ -260,7 +261,7 @@ notForgetTime=0
 blockNumber=0
 this_text="Just before starting lets again shortly remember the clock"
 exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
-rep_fam=5
+rep_fam=3
 exec(open("expectation_shapes_perceived_time_phase_2_familiarization.py").read())
 this_text="Now you can start the trials.\nPress 'Space' to go!"
 exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
@@ -469,6 +470,7 @@ for thisTrials in trialss:
             thisExp.addData('audCueStart.started', round(t,5))
             audCueStart.play()  # start the sound (it finishes automatically)
             audCue1Started=True
+            audCueStart.status = STARTED
         if audCueStart.status == STARTED:
         #if audCue1Started== True:
             # is it time to stop? (based on global clock, using actual start)
@@ -477,6 +479,7 @@ for thisTrials in trialss:
                 audCueStart.stop()
                 thisExp.addData('audCueStart.stopped', round(t,5))
                 audCue1Started=False
+                audCueStart.status = FINISHED
 
         #audCueStart.stream.status.active !=1.0
         # *placeholder* updates
@@ -557,7 +560,7 @@ for thisTrials in trialss:
                 win.timeOnFlip(distractor, 'tStartRefresh')  # time at next scr refresh
                 #outerDisk.setLineColor(distractor_color)
 
-                # add timestamp to datafile
+            # add timestamp to datafile
         if distractor.status == STARTED:
             if frameN >= (distractor.frameNStart + durS2):
                 # keep track of stop time/frame for later
@@ -579,6 +582,7 @@ for thisTrials in trialss:
             thisExp.addData('audCueEnd.started', t)       
             audCueEnd.play()  # start the sound (it finishes automatically)
             audCue2Started=True
+            audCueEnd.status = STARTED
         if audCueEnd.status == STARTED:
         #if audCue2Started== True:
             # is it time to stop? (based on global clock, using actual start)
@@ -586,6 +590,7 @@ for thisTrials in trialss:
                 # add timestamp to datafile
                 audCueEnd.stop()
                 thisExp.addData('audCueEnd.stopped', round(t,5))
+                audCueEnd.status = FINISHED
                 audCue2Started=False
         
         # *space2pass* updates
@@ -601,6 +606,10 @@ for thisTrials in trialss:
             # keyboard checking is just starting
             space2pass.clock.reset()  # now t=0
             space2pass.clearEvents(eventType='keyboard')
+            # if testing end routine
+            try: 
+                if testing:      continueRoutine=False
+            except NameError:     pass
         if space2pass.status == STARTED:
             #continueRoutine = False # a response ends the routine
             theseKeys = space2pass.getKeys(keyList=['space'], waitRelease=False)
@@ -654,15 +663,16 @@ for thisTrials in trialss:
             # keep track of start time/frame for later
             responsePointer.frameNStart = frameN  # exact frame index
             responsePointer.tStart = t  # local t and not account for scr refresh
-            responsePointer.tStartRefresh = tThisFlipGlobal  # on global time
+            #responsePointer.tStartRefresh = tThisFlipGlobal  # on global time
             win.timeOnFlip(responsePointer, 'tStartRefresh')  # time at next scr refresh
             # add timestamp to datafile
-            thisExp.addData('responsePointer.started',round(t,5))
+            thisExp.addData('responsePointer.started', responsePointer.tStart)
             responsePointer.status=STARTED
         if responsePointer.status == STARTED:  # only update if drawing
             if monitorunittools.pix2deg(pixels=hypoPx,monitor=win.monitor )>(diskSize/2):
                 responsePointer.setAutoDraw(True)
                 if responseTimeNotStarted==True:
+                    responseStartedTime= t  # local t and not account for scr refresh
                     thisExp.addData("responseStarted",t)
                     thisExp.addData("rtUntillMotionTreshold",t-responsePointer.tStart)
                     responseTimeNotStarted=False
@@ -675,8 +685,9 @@ for thisTrials in trialss:
                         responsePointer.tStop= t  # local t and not account for scr refresh
                         responsePointer.frameNstop=frameN
                         
-                        thisExp.addData("responsePointer.stopped",t)
-                        thisExp.addData("rTAfterMotionTreshold",t-responsePointer.tStart)
+                        thisExp.addData("responsePointer.stopped",responsePointer.tStop)
+                        thisExp.addData("rTAfterMotionTreshold",responsePointer.tStop-responsePointer.tStart)
+                        thisExp.addData("rtDurationBtwRespMotion",responsePointer.tStop-responseStartedTime)
                         perceivedTime=round(coord2time(x_coord_onCircle,y_coord_onCircle)/1000,5)
                         thisExp.addData("perceivedTime",perceivedTime)
                         #thisExp.addData("pTemporalError",pTemporalError)

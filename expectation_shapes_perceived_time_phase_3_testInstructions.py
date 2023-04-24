@@ -210,6 +210,9 @@ while continueRoutine:
         waitOnFlip = True
         win.callOnFlip(skipWelcome.clock.reset)  # t=0 on next screen flip
         win.callOnFlip(skipWelcome.clearEvents, eventType='keyboard')  # clear events on next screen flip
+        try: 
+            if testing:      continueRoutine=False
+        except NameError:     pass
     if skipWelcome.status == STARTED and not waitOnFlip:
         theseKeys = skipWelcome.getKeys(keyList=['space','left'], waitRelease=False)
         _skipWelcome_allKeys.extend(theseKeys)

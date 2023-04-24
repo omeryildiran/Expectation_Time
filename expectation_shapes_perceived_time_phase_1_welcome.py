@@ -219,6 +219,9 @@ while continueRoutine:
     if skipWelcome.status == STARTED and not waitOnFlip:
         theseKeys = skipWelcome.getKeys(keyList=['space'], waitRelease=False)
         _skipWelcome_allKeys.extend(theseKeys)
+        try: 
+            if testing:      continueRoutine=False
+        except NameError:     pass
         if len(_skipWelcome_allKeys):
             skipWelcome.keys = _skipWelcome_allKeys[-1].name  # just the last key pressed
             skipWelcome.rt = _skipWelcome_allKeys[-1].rt

@@ -16,6 +16,7 @@
     You can use modify and share this code as long as you give credit to the original author.
 
 """
+testing=True
 standAlone=True # If you run this code to run whole experiment you need to always state that standAlone is True
 ## creating mapping of experimental blocks
 blockDict={'base':"trial_list_0.5_0.csv",
