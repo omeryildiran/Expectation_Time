@@ -38,6 +38,23 @@ blockDict={'base1':"trial_list_0.5_green.csv",
           'mod2':"trials_mod_exp_2",
           "high2":"trial_list_0.8_red.csv"}#
 
+block_type="high2"
+#block_type="mod2"
+firstOrder=True #
+if firstOrder:
+    initFam=20
+    singleStimWithFeedback=20
+    secondFam=5
+    singleStimNoFeedback=40 
+    doubleStim=2
+else:
+    initFam=5
+    singleStimWithFeedback=5
+    secondFam=0
+    singleStimNoFeedback=0
+    doubleStim=1
+
+
 soundVolume=0.65
 ############################################################################################################
 
@@ -47,20 +64,20 @@ exec(open("expectation_shapes_perceived_time_0_initiateExp.py").read())
 # 1 - Welcome Screen
 exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
 # 2 - Familiarization
-rep_fam=20
+rep_fam=initFam
 exec(open("expectation_shapes_perceived_time_phase_2_familiarization.py").read())
 # 3 - Test instructions
 exec(open("expectation_shapes_perceived_time_phase_3_testInstructions.py").read())
 ##### Test Phase ###########################################################################################
 ##### 4 - Test Single stim with feedback 
-rep_test=20
+rep_test=singleStimWithFeedback
 exec(open("expectation_shapes_perceived_time_phase_4_test.py").read())
 # 4.1 - Test with 1 wo feedback
 this_text="Great! now after a couple of clock adaptation you will continue these trials without feedback:"
 exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
-rep_fam=40
+rep_fam=secondFam
 exec(open("expectation_shapes_perceived_time_phase_2_familiarization.py").read())
-rep_test=40
+rep_test=singleStimNoFeedback
 exec(open("expectation_shapes_perceived_time_phase_4_test_singleStim.py").read())
 # 4.2- Double_stim_training
 this_text="Now you will do the same task, only this time there you will see two"\
@@ -68,18 +85,18 @@ this_text="Now you will do the same task, only this time there you will see two"
 " But you will be asked for reporting time of one of them at the end of trial."
 exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
 expBlock="training_double_stim.csv"
-rep_trial=2
+rep_trial=doubleStim
 exec(open("expectation_shapes_perceived_time_phase_6_trial.py").read())
 ########################################################################################################
+
 # 5 - Trial instructions
-block_type="high2"
-expBlock=blockDict[block_type]
 exec(open("expectation_shapes_perceived_time_phase_5_trialInstructions.py").read())
+
+
 # 6 - Trial Phase
+#block_type="high2"
+expBlock=blockDict[block_type]
 rep_trial=1
-# if block_type in ["mod" ,"mod2"]:     rep_trial=5
-# elif block_type in["high", "high2"]: rep_trial=5
-# elif block_type=="base" : rep_trial=5
 exec(open("expectation_shapes_perceived_time_phase_6_trial.py").read())
 
 # 7 - End of Exp
