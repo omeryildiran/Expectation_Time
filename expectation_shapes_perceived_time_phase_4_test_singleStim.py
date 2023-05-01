@@ -190,7 +190,7 @@ outerDisk = visual.ShapeStim(
     win=win, name='outerDisk',units='deg', 
     size=(sizeHand*2, sizeHand*2), vertices='circle',
     ori=0.0, pos=(0, 0), anchor='center',
-    lineWidth=6,     colorSpace='rgb',  lineColor='white', fillColor=None,
+    lineWidth=3,     colorSpace='rgb',  lineColor='white', fillColor=None,
     opacity=None, depth=-3.0, interpolate=False)
 
 target = visual.ShapeStim(
@@ -210,7 +210,7 @@ placeholder = visual.ShapeStim(
     win=win, name='placeholder',units='deg', 
     size=(diskSize+0.1,diskSize+0.1), vertices='circle',
     ori=0.0, pos=(0, 0), anchor='center',
-    lineWidth=4.0,     colorSpace='rgb',  lineColor=[1,1,1], fillColor=None,
+    lineWidth=1.5,     colorSpace='rgb',  lineColor=[1,1,1], fillColor=None,
     opacity=None, depth=-4.0, interpolate=False)
 audCueEnd = sound.Sound('audioCue2Init.wav', secs=0.033, stereo=True, hamming=False,
     name='audCueEnd')
@@ -413,7 +413,7 @@ for thisTrials in trialss:
             audCueStart.tStart = t  # local t and not account for scr refresh
             audCueStart.tStartRefresh = tThisFlipGlobal  # on global time
             # add timestamp to datafile
-            thisExp.addData('audCueStart.started', round(t,5))
+            thisExp.addData('audCueStart.started', t)
             audCueStart.play()  # start the sound (it finishes automatically)
             audCue1Started=True
             audCueStart.status = STARTED
@@ -423,7 +423,7 @@ for thisTrials in trialss:
             if tThisFlipGlobal > audCueStart.tStartRefresh + 0.033-frameTolerance:
                 # add timestamp to datafile
                 audCueStart.stop()
-                thisExp.addData('audCueStart.stopped', round(t,5))
+                thisExp.addData('audCueStart.stopped', t)
                 audCue1Started=False
                 audCueStart.status = FINISHED
 
@@ -485,7 +485,7 @@ for thisTrials in trialss:
 
 
 
-        if audCueEnd.status == NOT_STARTED and t >= 2.0 and fixationEnded==True:
+        if audCueEnd.status == NOT_STARTED and t >= 2.0-frameTolerance and fixationEnded==True:
             # keep track of start time/frame for later
             audCueEnd.frameNStart = frameN  # exact frame index
             audCueEnd.tStart = t  # local t and not account for scr refresh
@@ -501,7 +501,7 @@ for thisTrials in trialss:
             if tThisFlipGlobal > audCueEnd.tStartRefresh + 0.033-frameTolerance:
                 # add timestamp to datafile
                 audCueEnd.stop()
-                thisExp.addData('audCueEnd.stopped', round(t,5))
+                thisExp.addData('audCueEnd.stopped', t)
                 audCueEnd.status = FINISHED
                 audCue2Started=False
         

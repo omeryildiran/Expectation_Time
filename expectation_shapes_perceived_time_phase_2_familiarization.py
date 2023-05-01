@@ -74,7 +74,7 @@ except NameError:
 
     # --- Setup the Window ---
     win = visual.Window(
-        size=[800,800], fullscr=True, screen=0, 
+        size=[800,800], fullscr=False, screen=0, 
         winType='pyglet', allowStencil=False,
         monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
         blendMode='avg', useFBO=True, 
@@ -153,13 +153,13 @@ clockOutDisk = visual.ShapeStim(
     win=win, name='clockOutDisk',units='deg', 
     size=(sizeHand*2, sizeHand*2), vertices='circle',
     ori=0.0, pos=(0, 0), anchor='center',
-    lineWidth=6.0,     colorSpace='rgb',  lineColor='white', fillColor=None,
+    lineWidth=2.0,     colorSpace='rgb',  lineColor='white', fillColor=None,
     opacity=None, depth=-3.0, interpolate=True)
 clockHand = visual.ShapeStim(
     win=win, name='clockHand', vertices=[[0,0],[1,1]],units='deg', 
     size=(sizeHand-0.2, 0.0001),
     ori=1.0, pos=(0, 0), anchor='bottom-center',
-    lineWidth=4.0,     colorSpace='rgb',  lineColor='white', fillColor='white',
+    lineWidth=2.0,     colorSpace='rgb',  lineColor='white', fillColor='white',
     opacity=None, depth=-4.0, interpolate=False)
 audioCue2Start = sound.Sound('A', secs=-1, stereo=True, hamming=False,
     name='audioCue2Start')

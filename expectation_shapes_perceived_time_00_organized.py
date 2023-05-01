@@ -15,17 +15,33 @@
     The code is subject to change and update and under creative commons license.
     You can use modify and share this code as long as you give credit to the original author.
 
+    #### Experiment Instructions ####
+    In this study, you will be given a series of trials. In each trial, you will see a clock's circle and two different colored disk. The disk will be presented in one of two colors: red or green. 
+    After end of the trial, you will be asked to report the time of one of the disks by clicking appropriate position on the clock's circle.
+    The color of the disk you will be asked to report will be indicated by cue which is exactly same as the target disk's color and size.
+    The cue will be presented at the end of the trial.
+    In the baseline condition, the probability of reporting the time of the disk is equal for each color.
+    In the expectation condition, the probability of reporting the time of the disk is higher for one of the colors.
+    The experiment is consisted of 3 phases: Familiarization, Test and Trial.
+    In the familiarization phase, there will be a clock lasting for a specific amount of time and the hand of clock will be rotating from 12'o clock position to 12'o clock position.
+    In the test phase, you will solve the trials but this time you will be given feedback about your performance.
+    In the trial phase, you will solve the trials without feedback.
+    There will be 500 trials and you will be given breaks in every 25 trial.
 """
-testing=True
+testing=False 
 standAlone=True # If you run this code to run whole experiment you need to always state that standAlone is True
 ## creating mapping of experimental blocks
-blockDict={'base':"trial_list_0.5_0.csv",
+blockDict={'base1':"trial_list_0.5_green.csv",
+            'base2':"trial_list_0.5_red.csv",
            'mod':"trials_mod_exp",
-           "high":"trial_list_0.85_0.csv",
+           "high1":"trial_list_0.8_green.csv",
           'mod2':"trials_mod_exp_2",
           "high2":"trial_list_0.8_red.csv"}#
 
 soundVolume=0.65
+############################################################################################################
+
+
 # 0 - initiate exp
 exec(open("expectation_shapes_perceived_time_0_initiateExp.py").read())
 # 1 - Welcome Screen
@@ -37,12 +53,12 @@ exec(open("expectation_shapes_perceived_time_phase_2_familiarization.py").read()
 exec(open("expectation_shapes_perceived_time_phase_3_testInstructions.py").read())
 ##### Test Phase ###########################################################################################
 ##### 4 - Test Single stim with feedback 
-rep_test=40
+rep_test=20
 exec(open("expectation_shapes_perceived_time_phase_4_test.py").read())
 # 4.1 - Test with 1 wo feedback
 this_text="Great! now after a couple of clock adaptation you will continue these trials without feedback:"
 exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
-rep_fam=5
+rep_fam=40
 exec(open("expectation_shapes_perceived_time_phase_2_familiarization.py").read())
 rep_test=40
 exec(open("expectation_shapes_perceived_time_phase_4_test_singleStim.py").read())
@@ -52,14 +68,14 @@ this_text="Now you will do the same task, only this time there you will see two"
 " But you will be asked for reporting time of one of them at the end of trial."
 exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
 expBlock="training_double_stim.csv"
-rep_trial=4
+rep_trial=2
 exec(open("expectation_shapes_perceived_time_phase_6_trial.py").read())
 ########################################################################################################
 # 5 - Trial instructions
-exec(open("expectation_shapes_perceived_time_phase_5_trialInstructions.py").read())
-# 6 - Trial Phase
 block_type="high2"
 expBlock=blockDict[block_type]
+exec(open("expectation_shapes_perceived_time_phase_5_trialInstructions.py").read())
+# 6 - Trial Phase
 rep_trial=1
 # if block_type in ["mod" ,"mod2"]:     rep_trial=5
 # elif block_type in["high", "high2"]: rep_trial=5

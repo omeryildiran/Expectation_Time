@@ -12,8 +12,8 @@ except NameError:
     import psychopy
     from psychopy import locale_setup
     from psychopy import prefs
-    #prefs.hardware['audioLib'] = 'PTB'
-    #prefs.hardware['audioLatencyMode'] = '4'
+    prefs.hardware['audioLib'] = 'PTB'
+    prefs.hardware['audioLatencyMode'] = '4'
     #from pysoundcard import Stream
     #from scipy.io.wavfile import read as wavread
 
@@ -74,24 +74,24 @@ except NameError:
 
     # --- Setup the Window ---
     win = visual.Window(
-        size=[1920,1080], fullscr=True, screen=0, 
+        size=[800,640], fullscr=True, screen=0, 
         winType='pyglet', allowStencil=False,
         monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
         blendMode='avg', useFBO=True, 
         units='height')
     # win.mouseVisible = False
     # ## Set the monitor to the correct distance and size
-    # win.monitor.setSizePix((1929,1080))
+    win.monitor.setSizePix((800,640))
     # win.mouseVisible = False
-    # win.monitor.setWidth(15)
-    # win.monitor.setDistance(57)
+    win.monitor.setWidth(36.9)
+    win.monitor.setDistance(57)
 
     # store frame rate of monitor if we can measure it
     expInfo['frameRate'] = win.getActualFrameRate()
     if expInfo['frameRate'] != None:
         frameDur = 1.0 / round(expInfo['frameRate'])
     else:
-        frameDur = 1.0 / 60.0  # could not measure, so guess
+        frameDur = 1.0 / 120.0  # could not measure, so guess
     # --- Setup input devices ---
     ioConfig = {}
 
@@ -193,7 +193,7 @@ outerDisk = visual.ShapeStim(
     win=win, name='outerDisk',units='deg', 
     size=(sizeHand*2, sizeHand*2), vertices='circle',
     ori=0.0, pos=(0, 0), anchor='center',
-    lineWidth=6,     colorSpace='rgb',  lineColor='white', fillColor=None,
+    lineWidth=3,     colorSpace='rgb',  lineColor='white', fillColor=None,
     opacity=None, depth=-3.0, interpolate=False)
 distractor = visual.ShapeStim(
     win=win, name='distractor',units='deg', 
@@ -205,20 +205,20 @@ target = visual.ShapeStim(
     win=win, name='target',units='deg', 
     size=(diskSize,diskSize), vertices='circle',
     ori=0.0, pos=(0, 0), anchor='center',
-    lineWidth=3.0,     colorSpace='rgb',  lineColor='white', fillColor='white',
+    lineWidth=2.0,     colorSpace='rgb',  lineColor='white', fillColor='white',
     opacity=None, depth=-5.0, interpolate=False)
 cueForRep = visual.ShapeStim(
     win=win, name='cueForRep',units='deg', 
     size=(diskSize,diskSize), vertices='circle',
     ori=0.0, pos=(0, 0), anchor='center',
-    lineWidth=3.0,     colorSpace='rgb',  lineColor='white', fillColor='white',
+    lineWidth=2.0,     colorSpace='rgb',  lineColor='white', fillColor='white',
     opacity=None, depth=-5.0, interpolate=False)
 
 placeholder = visual.ShapeStim(
     win=win, name='placeholder',units='deg', 
     size=(diskSize+0.1,diskSize+0.1), vertices='circle',
     ori=0.0, pos=(0, 0), anchor='center',
-    lineWidth=4,     colorSpace='rgb',  lineColor=[1,1,1], fillColor=None,
+    lineWidth=1.5,     colorSpace='rgb',  lineColor=[1,1,1], fillColor=None,
     opacity=None, depth=-4.0, interpolate=False)
 audCueEnd = sound.Sound('audioCue2Init.wav', secs=0.033, stereo=True, hamming=False,
     name='audCueEnd')
@@ -261,7 +261,7 @@ notForgetTime=0
 blockNumber=0
 this_text="Just before starting lets again shortly remember the clock"
 exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
-rep_fam=3
+rep_fam=4
 exec(open("expectation_shapes_perceived_time_phase_2_familiarization.py").read())
 this_text="Now you can start the trials.\nPress 'Space' to go!"
 exec(open("expectation_shapes_perceived_time_phase_1_welcome.py").read())
@@ -573,7 +573,7 @@ for thisTrials in trialss:
 
         
 
-        if audCueEnd.status == NOT_STARTED and t >= 2.0 and fixationEnded==True:
+        if audCueEnd.status == NOT_STARTED and t >= 2.0-frameTolerance and fixationEnded==True:
             # keep track of start time/frame for later
             audCueEnd.frameNStart = frameN  # exact frame index
             audCueEnd.tStart = t  # local t and not account for scr refresh
@@ -589,7 +589,7 @@ for thisTrials in trialss:
             if tThisFlipGlobal > audCueEnd.tStartRefresh + 0.033-frameTolerance:
                 # add timestamp to datafile
                 audCueEnd.stop()
-                thisExp.addData('audCueEnd.stopped', round(t,5))
+                thisExp.addData('audCueEnd.stopped', t)
                 audCueEnd.status = FINISHED
                 audCue2Started=False
         
