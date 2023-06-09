@@ -1,0 +1,194 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Power Analysis notbook First create the dataset conditions
+
+```{r}
+ library(data.table)
+library(ggplot2)
+library(lme4)
+library(simr)
+set.seed(123)
+# Define function to create trial list
+library(data.table)
+create_trial_list <- function(numberOfTrials, targetProb, colNum = 1) {
+  colors <- c("red", "green")
+  distractorProb <- 1 - targetProb
+  
+  # Creating delay
+  delay <- rep(c(-300, -233, -167, -100, -33, 33, 100, 167, 233, 300), length.out = numberOfTrials)
+  delay <- sample(delay)
+  
+  # Generate expectation
+  expectation <- c(rep(targetProb, round(numberOfTrials * targetProb)), 
+                   rep(distractorProb, round(numberOfTrials * distractorProb)))
+  expectation <- sample(expectation)
+  
+  # Giving color to stimulus
+  stim_color <- vector(length = numberOfTrials)
+  distractor_color <- vector(length = numberOfTrials)
+  congruency <- vector(length = numberOfTrials)
+  
+  initIntervalMs <- runif(numberOfTrials, 150, 1850)  # Generate a list of uniform random numbers between 150 and 1850
+  
+  for (i in 1:length(delay)) {
+    if (delay[i] > 0) {
+      initIntervalMs[i] <- runif(1, 150, 1850 - delay[i])  # Target onset relative to start of trial
+    } else if (delay[i] < 0) {
+      initIntervalMs[i] <- runif(1, 150 - delay[i], 1850)  # Target onset relative to start of trial
+    }
+    
+    if (targetProb == 0.5) {
+      congruency[i] <- "none"
+      stim_color[i] <- colors[1]
+      distractor_color[i] <- colors[2]
+    } else {
+      if (expectation[i] == targetProb) {
+        congruency[i] <- "met"
+        stim_color[i] <- colors[colNum]
+        distractor_color[i] <- colors[max(colNum - 1, 1)]
+      } else {
+        congruency[i] <- "unmet"
+        stim_color[i] <- colors[max(colNum - 1, 1)]
+        distractor_color[i] <- colors[colNum]
+      }
+    }
+  }
+  
+  # Apply the inverse CDF transformation to the initIntervalMs values
+  uniform_rvs <- runif(numberOfTrials)
+  initIntervalMs <- qunif(uniform_rvs, min = 150, max = 1850)
+  
+  for (i in 1:length(delay)) {
+    if (delay[i] > 0) {
+      initIntervalMs[i] <- runif(1, 150, 1850 - delay[i])  # Target onset relative to start of trial
+    } else if (delay[i] < 0) {
+      initIntervalMs[i] <- runif(1, 150 - delay[i], 1850)  # Target onset relative to start of trial
+    }
+  }
+  
+  data <- data.table(delay, expectation, congruency, stim_color, distractor_color, targetTimeMs = initIntervalMs)
+  
+  return (data)
+}
+targetProb <- 0.8
+participant <- rep(1:30, each = 500)
+numberOfTrials=500
+num_of_participants=30
+df_created_all <- data.frame()
+for (i in 1:num_of_participants) {
+  df <- create_trial_list(500, targetProb, sample(1:2, 1))
+  df$participant <- i
+  df_created_all <- rbind(df_created_all, df)
+}
+
+df_single <- create_trial_list(500, targetProb, sample(1:2, 1))
+df_single$delayS=df_single$delay / 1000
+df_single$participant=1
+df_created_all$delayS=df_created_all$delay / 1000
+df_created_all$participant=participant
+df_created_all$sqr_distr=df_created_all$delayS**2
+df_created_all$third_distr=df_created_all$delayS**3
+df_created_all$quad_distr=df_created_all$delayS**4
+df_created_all$modeled_time_error=(-1/df_created_all$expectation)*df_created_all$delayS*exp(-(df_created_all$delayS**2))
+
+participantid <- rep(1:4, each = 500)
+
+```
+
+## Run linear mixed model
+
+Do power analysis on pilot data
+
+```{r}
+# params 
+# n observers for powerCurve
+nobs_sim = c(8,15,20,25)
+
+df_pilot$expectation=as.factor(df_pilot$expectation)
+df_pilot$congruency=as.factor(df_pilot$congruency)
+#df_pilot$delayS=as.factor(df_pilot$delayS)
+
+#df_pilot$expectation=as.numeric(df_pilot$expectation)
+df_pilot$exp_delay_sq=exp(-(df_pilot$delayS**2))
+summary(df_pilot$expectation)
+predictors="(delayS+sqr_distr+modeled_time_error)*expectation"
+fit.for.power = lmer(pTemporalError ~ (delayS+sqr_distr+exp_delay_sq)*congruency + (1|participant), data = df_pilot)
+#fit.for.power = glmer(pTemporalError ~ delayS*congruency + (1  |participant), data = df_pilot)
+# check object
+summary(fit.for.power)
+VarCorr(fit.for.power)
+
+fixef(fit.for.power)
+
+```
+
+# do sim
+
+```{r}
+#sim_power  = powerSim(fit.for.power,test = fixed("distractor"), nsim=nsim)
+sim_power  = powerSim(fit.for.power, test = fcompare(. ~  delayS  + (1 |participant)), nsim=20)
+sim_power
+summary(sim_power)
+
+sim_power  = powerSim(fit.for.power, test = fcompare(. ~  delayS*congruency + (1 |participant)), nsim=20)
+sim_power
+summary(sim_power)
+
+
+```
+
+
+Extend simulation
+
+```{r}
+# extend n 
+model_change_n = extend(fit.for.power, along = 'participant', n=max(nobs_sim))
+# check n
+nrow(getData(model)) 
+nrow(getData(model_change_n)) 
+sim_power_var_n <- powerCurve(model_change_n, test = fcompare(. ~  delayS*expectation+ (1 |participant)), sim = model_change_n, along="participant",breaks=c(10,15,20,25), nsim = nsim)
+print(sim_power_var_n)
+plot(sim_power_var_n)
+
+```
+```{r}
+
+
+```
+
+
+# Create an artificial mixed model object
+
+```{r}
+df_created_all$congruency=as.factor(df_created_all$congruency)
+df_created_all$exp_delay_sq=exp(-(df_created_all$delayS**2))
+df_created_all$expectation=as.factor(df_created_all$expectation)
+model <- makeLmer(. ~ (delayS + sqr_distr + exp_delay_sq) * congruency+(1|participant), fixef=fixef(fit.for.power), VarCorr=0.095871, sigma=0.348798, data=df_created_all)# sigma=res,
+#summary(model)
+```
+
+## power analysis along different sample sizes
+
+```{r}
+sim_power_var_n <- powerCurve(model, test = fcompare(. ~  delayS  + (1 |participant)), sim = model, along="participant", breaks=c(8,15,20,25), nsim = 1,alpha = .01)
+print(sim_power_var_n)
+
+plot(sim_power_var_n)
+
+```
+```{r}
+sim = powerSim(model,fixed("delayS"), sim = model, nsim = 10,alpha = .05,progress=FALSE)
+sim= powerCurve(model, fixed("delayS"), sim = model, along="participant", breaks=c(8,15,20,25), nsim = 1,alpha = .05,congruency)
+print(sim_power_var_n)
+sim
+```
+
+
+```{r}
+sim_power_var_n <- powerCurve(model, test = fcompare(. ~  delayS*congruency  + (1 |participant)), sim = model, along="participant", breaks=c(5,10,15,20), nsim = 100,alpha = .01)
+print(sim_power_var_n)
+plot(sim_power_var_n)
+```

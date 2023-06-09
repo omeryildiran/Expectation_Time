@@ -1,0 +1,100 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+setwd("~/Omer_Repos/Internship Pascal/Expectation_Shapes_Perceived_Time_final/analysis/data")
+library(ggplot2)
+#084661_expectation_shapes_perceived_time_2023-03-09_21h27.15.100 test
+#274531_expectation_shapes_perceived_time_2023-03-10_10h12.16.162
+# first 084661_expectation_shapes_perceived_time_2023-03-09_21h27.15.100
+#df=read.csv("data/274531_expectation_shapes_perceived_time_2023-03-10_10h12.16.162.csv")
+#df=read.csv("nicola_pilot_expectation_shapes_perceived_time_2023-03-16_15h38.21.393.csv")
+df=read.csv("niho_pilot_base_expectation_shapes_perceived_time_2023-03-16_23h46.19.804.csv")
+df=read.csv("omer_pilot2_expectation_shapes_perceived_time_2023-03-17_00h51.58.576.csv")
+df=read.csv("omer_pilot1_expectation_shapes_perceived_time_2023-03-17_12h35.14.339.csv")
+df=read.csv("omer_pilot_high_exp_expectation_shapes_perceived_time_2023-03-17_12h35.14.339.csv")
+df=read.csv("299271_expectation_shapes_perceived_time_2023-03-19_15h42.48.633.csv")
+df=read.csv("nicola_base_pilot_expectation_shapes_perceived_time_2023-03-20_15h03.16.305.csv")
+df=read.csv("erva07_expectation_shapes_perceived_time_2023-03-23_20h55.33.677.csv")
+df=read.csv("erva07_expectation_shapes_perceived_time_2023-03-23_20h55.33.677.csv")
+data_nicola_85_1="nicola_85_1_expectation_shapes_perceived_time_2023-03-28_15h04.34.263.csv"
+data_Erva_70="erva07_expectation_shapes_perceived_time_2023-03-23_20h55.33.677.csv"
+data_omer_80G="omer80G_expectation_shapes_perceived_time_2023-04-03_14h30.36.416.csv" #expected 80 percent
+data_omer70="omer70_expectation_shapes_perceived_time_2023-03-27_21h43.36.152.csv"
+data_erva80="erva80G_expectation_shapes_perceived_time_2023-04-07_23h25.04.855.csv"
+```
+
+Clean data funcition
+```{r}
+data_cleaner <- function(data) {
+  df=read.csv(data)
+  #df <- read.csv(paste0(data_folder, data))
+  df$delayS <- df$delay / 1000
+  df$pTemporalError <- df$perceivedTime - df$target.started
+  df$pTemporalErrorMs <- df$pTemporalError * 1000
+  df$physicalDelay <- df$distractor.started - df$target.started
+  df$physicalDelayMs <- df$physicalDelay * 1000
+  df_test <- df[df$isTrial == "testSingleStim", ]
+  avgError <- mean(df_test$perceivedTime - df_test$target.started)
+  df <- df[df$isTrial == "trial" & !is.na(df$pTemporalError), ]
+  df$pTemporalErrorAveraged <- df$pTemporalError - avgError
+  df = df[, c("delayS","pTemporalError","pTemporalErrorMs","perceivedTime", "isTrial","target_color","stim_color","distractor_color","trial_num","delay","physicalDelayMs","physicalDelay","expectation","congruency","target.started",
+              "pTemporalErrorAveraged","participant","rTAfterMotionTreshold","responseStarted")]
+  return (df)
+}
+```
+Take and clean
+
+```{r}
+
+df=data_cleaner(data_erva80)
+
+mean(df$rTAfterMotionTreshold)
+df=df_pilot
+df$congruency=as.factor(df$congruency)
+ggplot(data=df,aes(x=rTAfterMotionTreshold,y=perceivedTime),color=congruency)+
+  geom_point()+
+  ylim(0,2)+
+  xlim(0,2)+
+  geom_abline(intercept = 0, slope = 1)+
+  coord_fixed()
+  
+
+
+```
+Plot Data
+
+
+```{r}
+ggplot(data=df, aes(y=perceivedTime,x=target.started))+
+  geom_point()+
+  geom_smooth(method='lm', formula= y~x)+
+  geom_abline(intercept = 0, slope = 1)+
+  facet_wrap(~congruency)
+```
+
+
+Plot temporal errors 
+
+```{r}
+ggplot(data=df,aes(x=physicalDelay,y=pTemporalError,color=congruency))+
+  geom_point()+
+  #geom_line()+
+  geom_smooth(method='lm', formula= y~x)+
+  #geom_smooth()+
+  #xlim(-0.32,+0.32)+
+  #ylim(0,1.9)+
+  facet_wrap(~congruency)+
+  scale_x_continuous(n.breaks = 15)+
+  scale_y_continuous(n.breaks =15)+# limits=c(-1000,1000))+
+  geom_hline(yintercept = 0,alpha=0.3) + geom_vline(xintercept = 0,alpha=0.3)
+
+
+```
+

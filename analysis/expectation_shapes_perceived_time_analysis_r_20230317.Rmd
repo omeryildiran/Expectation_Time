@@ -1,0 +1,66 @@
+---
+title: "exp_time_analysis_r_20230317"
+author: "Omer Faruk Yildiran"
+date: "2023-03-17"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+setwd("~/Omer_Repos/Internship Pascal/Expectation_Shapes_Perceived_Time_final/analysis/data")
+library(ggplot2)
+#084661_expectation_shapes_perceived_time_2023-03-09_21h27.15.100 test
+#274531_expectation_shapes_perceived_time_2023-03-10_10h12.16.162
+# first 084661_expectation_shapes_perceived_time_2023-03-09_21h27.15.100
+#df=read.csv("data/274531_expectation_shapes_perceived_time_2023-03-10_10h12.16.162.csv")
+#df=read.csv("nicola_pilot_expectation_shapes_perceived_time_2023-03-16_15h38.21.393.csv")
+df=read.csv("data/niho_pilot_base_expectation_shapes_perceived_time_2023-03-16_23h46.19.804.csv")
+df=read.csv("data/omer_pilot2_expectation_shapes_perceived_time_2023-03-17_00h51.58.576.csv")
+df=read.csv("data/omer_pilot1_expectation_shapes_perceived_time_2023-03-17_12h35.14.339.csv")
+
+df <- df[,!names(df) %in% c("famLoop.thisRepN", "famLoop.thisTrialN", " famLoop.thisN","famLoop.thisIndex")]
+df=df[df$isTrial=="trial",]
+df$delayS=df$delay/1000
+df$pTemporalError=df$perceivedTime-df$target.started
+df$pTemporalErrorMS=df$pTemporalError*1000
+df$physicalDelay=df$distractor.started-df$target.started
+df$physicalDelayMS=df$physicalDelay*1000
+```
+
+
+
+```{r}
+#summary(df)
+df_less=df[26:nrow(df),]
+head(df_less)
+
+```
+
+
+```{r pressure, echo=FALSE}
+
+ggplot(data=df_pilot,aes(x=physicalDelayMS,y=pTemporalErrorMS,color=target_color))+
+  geom_point()+
+  #geom_line()+
+  geom_smooth()+
+  #xlim(-0.32,+0.32)+
+  #ylim(0,1.9)+
+  facet_wrap(~congruency)+
+  scale_x_continuous(n.breaks = 15)+
+  scale_y_continuous(n.breaks =20)+
+  geom_hline(yintercept = 0,alpha=0.3) + geom_vline(xintercept = 0,alpha=0.3)
+```
+
+Looking overall result
+```{r}
+ggplot(data=df_pilot,aes(x=physicalDelayMS,y=pTemporalErrorMS))+
+  geom_point()+
+  #geom_line()+
+  geom_smooth()+
+  #xlim(-0.32,+0.32)+
+  #ylim(0,1.9)+
+  #facet_wrap(~congruency)+
+  scale_x_continuous(n.breaks = 15)+
+  scale_y_continuous(n.breaks =10)+
+  geom_hline(yintercept = 0,alpha=0.3) + geom_vline(xintercept = 0,alpha=0.3)
+```
+
