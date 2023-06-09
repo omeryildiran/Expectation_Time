@@ -7,12 +7,12 @@
     The experiment is divided into 3 phases: Familiarization, Test and Trial.
     The familiarization phase is divided into 2 blocks: Single_stim and Double_stim.
     The test phase is divided into 2 blocks: Single_stim and Double_stim.
-    qThe trial phase is divided into 4 blocks: base, mod, high and high2.
+    The trial phase is divided into 4 blocks: base, mod, high and high2.
     The base block is the baseline condition, in which the participant is asked to report the time of the one of the stimulus, and the probability of each stimulus to be asked is equal.
     The high block is the high condition, in which the participant is asked to report the time of the one of the stimulus, but the probability 
     of reporting (the stimulus in question at the end) the time of the cetain stimulus is higher.
     This code and all the custom functions are written in Python and PsychoPy, with also the help of PsychoPy Builder.
-    The code is subject to change and update and under creative commons license.
+    The code is subject to change and update under creative commons license.
     You can use modify and share this code as long as you give credit to the original author.
 
     #### Experiment Instructions ####
@@ -40,7 +40,7 @@ blockDict={'base1':"trial_list_0.5_green.csv",
 
 block_type="high2"
 #block_type="mod2"
-firstOrder=True #
+firstOrder=False #
 if firstOrder:
     initFam=20
     singleStimWithFeedback=20
